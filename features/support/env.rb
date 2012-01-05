@@ -42,7 +42,7 @@ Spork.each_run do
   begin
     DatabaseCleaner.strategy = :transaction
   rescue NameError
-    raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+    warn "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
   end
   
   # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
