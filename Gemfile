@@ -16,3 +16,10 @@ end
 group :test do
   gem 'cucumber-rails'
 end
+
+group :development, :test do
+  gem 'guard'
+  gem 'guard-cucumber'
+  gem 'guard-spork'
+  gem 'guard-jasmine'
+end
