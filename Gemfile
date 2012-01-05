@@ -10,11 +10,7 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
   gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
-end
-
-group :test do
-  gem 'cucumber-rails'
+  gem 'uglifier',     '>= 1.0.3'
 end
 
 group :development, :test do
@@ -22,4 +18,7 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'guard-spork'
   gem 'guard-jasmine'
+  gem 'cucumber-rails'
+  gem 'jasmine-rails'
+  gem 'spork'
 end
