@@ -44,7 +44,7 @@ div {
   border: 2px solid grey;
   border-top: none;
   background: #e0e0e2;
-  font-size: 10px;
+  font-size: 12px;
 
   .clear {
     clear: both;
@@ -77,19 +77,19 @@ div {
   }
 
   .delete {
-    width: 51px;
+    width: 56px;
   }
 
   .tab {
-    width: 52px;
+    width: 55px;
   }
 
   .caps, .enter {
-    width: 62px;
+    width: 63px;
   }
 
   .shift {
-    width: 80px;
+    width: 82px;
   }
 
   .fn {
@@ -111,6 +111,7 @@ div {
     -webkit-box-shadow: none;
     box-shadow:         none;
     background: none;
+    margin: 8px 0 0 5px;
 
     div {
       position: relative;
