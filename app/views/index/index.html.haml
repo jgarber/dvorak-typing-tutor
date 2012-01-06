@@ -7,36 +7,51 @@
 .keyboard
   -# first row
   - 13.times do |num|
-    .key.square{ id: "1_row_#{num}" }= num
-  .square.delete delete
+    .key.square{ id: "1_row_#{num}" }
+      %p= num
+  .square.delete 
+    %p delete
 
   -# second row
-  .square.tab.clear tab
+  .square.tab.clear 
+    %p tab
   - 13.times do |num|
-    .key.square{ id: "2_row_#{num}" }= num
+    .key.square{ id: "2_row_#{num}" }
+      %p= num
 
   -# home row
-  .square.caps caps lock
+  .square.caps
+    %p caps lock
   - 11.times do |num|
-    .key.square{ id: "3_row_#{num}" }= num
-  .square.enter return
+    .key.square{ id: "3_row_#{num}" }
+      %p= num
+  .square.enter
+    %p return
 
   -# third row
-  .square.shift shift
+  .square.shift
+    %p shift
   - 10.times do |num|
-    .key.square{ id: "4_row_#{num}" }= num
-  .square.shift shift
+    .key.square{ id: "4_row_#{num}" }
+      %p= num
+  .square.shift
+    %p shift
 
   -# bottom row
-  .bottom.fn fn
-  .bottom.fn &nbsp;
-  .bottom.fn &nbsp;
-  .bottom.super &nbsp;
-  .bottom.space &nbsp;
-  .bottom.super &nbsp;
-  .bottom.fn &nbsp;
+  .bottom.fn
+    %p fn
+  .bottom.fn
+  .bottom.fn
+  .bottom.super
+  .bottom.space
+  .bottom.super
+  .bottom.fn
   .bottom.arrows
-    .key.arrow.up ˄
-    .key.clear.arrow.left ˂
-    .key.clear.arrow.down ˅
-    .key.clear.arrow.right ˃
+    .key.arrow.up
+      %p ˄
+    .key.clear.arrow.left
+      %p ˂
+    .key.clear.arrow.down
+      %p ˅
+    .key.clear.arrow.right
+      %p ˃

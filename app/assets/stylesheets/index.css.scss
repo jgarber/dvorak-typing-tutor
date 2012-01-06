@@ -70,10 +70,19 @@ div {
 
   .bottom {
     height: 37px;
+
+    p {
+      height: 37px;
+    }
   }
 
   .square {
     height: 32px;
+
+    p {
+      height: 32px;
+      margin: 9px 0;
+    }
   }
 
   .delete {
@@ -121,6 +130,11 @@ div {
 
     .arrow {
       height: 16px;
+
+      p {
+        height: 16px;
+        margin: 5px 0;
+      }
     }
 
     .up, .down {
