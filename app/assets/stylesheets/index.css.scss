@@ -1,3 +1,149 @@
-// Place all the styles related to the index controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+div {
+  border-radius: 5px;
+}
+
+.lesson_box, .input_box, .keyboard {
+  margin: 0 auto;
+}
+
+.box_with_border {
+  position: relative;
+  margin: 0 auto;
+  top: 120px;
+  width: 550px;
+  height: 30px;
+  border: 2px solid grey;
+}
+
+.lesson_box {
+  width: 500px;
+  height: 200px;
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
+  border-radius: 0;
+  margin-bottom: 30px;
+
+  .sentence {
+    height: 33%;
+  }
+}
+
+.input_box {
+  width: 600px;
+  height: 100px;
+  border: 2px solid grey;
+  padding: 50px;
+  font-weight: bold;
+}
+
+.keyboard {
+  height: 200px;
+  width: 570px;
+  padding: 15px 15px 15px 22px;
+  border-radius: 0 0 5px 5px;
+  border: 2px solid grey;
+  border-top: none;
+  background: #e0e0e2;
+  font-size: 10px;
+
+  .clear {
+    clear: both;
+  }
+
+  div {
+    margin: 5px 5px 0 0;
+    background: white;
+    float: left;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+    border: 1px solid #b9b9bb;
+
+    -moz-box-shadow:    1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    box-shadow:         1px 1px 1px 1px #ccc;
+  }
+
+  .key {
+    width: 32px;
+  }
+
+  .bottom {
+    height: 37px;
+  }
+
+  .square {
+    height: 32px;
+  }
+
+  .delete {
+    width: 51px;
+  }
+
+  .tab {
+    width: 52px;
+  }
+
+  .caps, .enter {
+    width: 62px;
+  }
+
+  .shift {
+    width: 80px;
+  }
+
+  .fn {
+    width: 32px;
+  }
+
+  .super {
+    width: 42px;
+  }
+
+  .space {
+    width: 181px;
+  }
+
+  .arrows {
+    width: 115px;
+    border: none;
+    -moz-box-shadow:    none;
+    -webkit-box-shadow: none;
+    box-shadow:         none;
+    background: none;
+
+    div {
+      position: relative;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .arrow {
+      height: 16px;
+    }
+
+    .up, .down {
+      left: 41px;
+    }
+
+    .up {
+      bottom: 5px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .down {
+      bottom: 33px;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .left {
+      bottom: 10px;
+    }
+
+    .right {
+      bottom: 56px;
+      left: 82px;
+    }
+  }
+}
+

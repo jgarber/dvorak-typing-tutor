@@ -1,2 +1,42 @@
-%h1 Index#index
-%p Find me in app/views/index/index.html.haml
+.box_with_border
+.lesson_box
+  .sentence.previous
+  .sentence.cuent
+  .sentence.next
+.input_box{ contenteditable: true }
+.keyboard
+  -# first row
+  - 13.times do |num|
+    .key.square{ id: "1_row_#{num}" }= num
+  .square.delete delete
+
+  -# second row
+  .square.tab.clear tab
+  - 13.times do |num|
+    .key.square{ id: "2_row_#{num}" }= num
+
+  -# home row
+  .square.caps caps lock
+  - 11.times do |num|
+    .key.square{ id: "3_row_#{num}" }= num
+  .square.enter return
+
+  -# third row
+  .square.shift shift
+  - 10.times do |num|
+    .key.square{ id: "4_row_#{num}" }= num
+  .square.shift shift
+
+  -# bottom row
+  .bottom.fn fn
+  .bottom.fn &nbsp;
+  .bottom.fn &nbsp;
+  .bottom.super &nbsp;
+  .bottom.space &nbsp;
+  .bottom.super &nbsp;
+  .bottom.fn &nbsp;
+  .bottom.arrows
+    .key.arrow.up ˄
+    .key.clear.arrow.left ˂
+    .key.clear.arrow.down ˅
+    .key.clear.arrow.right ˃
