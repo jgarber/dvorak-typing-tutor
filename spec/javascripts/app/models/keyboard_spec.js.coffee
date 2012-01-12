@@ -1,7 +1,3 @@
-#= require app/models/layouts
-#= require app/models/keyboard
-#= require app/helpers/jquery_fill_keyboard
-
 describe 'Keyboard', ->
 
   beforeEach ->
@@ -29,10 +25,3 @@ describe 'Keyboard', ->
     $('.keyboard').fill_keyboard('dvorak')
     expect($('.lower').html()).toEqual('s')
     expect($('.upper').html()).toEqual('a')
-
-  describe '$.fill_keyboard', ->
-
-    it 'should set Keyboard.current_layout', ->
-      loadFixtures('single_key')
-      $('.keyboard').fill_keyboard('dvorak')
-      expect(Keyboard.current_layout).toEqual('dvorak')
