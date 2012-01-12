@@ -7,33 +7,40 @@
 .keyboard
   -# first row
   - 13.times do |num|
-    .key.square{ id: "1_row_#{num}" }
-      %p= num
+    .key.square{ id: "key_#{num}" }
+      %p.lower
+      %p.upper
+
   .square.delete 
     %p delete
 
   -# second row
   .square.tab.clear 
     %p tab
-  - 13.times do |num|
-    .key.square{ id: "2_row_#{num}" }
-      %p= num
+  - (13..25).each do |num|
+    .key.square{ id: "key_#{num}" }
+      %p.lower
+      %p.upper
 
   -# home row
   .square.caps
     %p caps lock
-  - 11.times do |num|
-    .key.square{ id: "3_row_#{num}" }
-      %p= num
+  - (26..36).each do |num|
+    .key.square{ id: "key_#{num}" }
+      %p.lower
+      %p.upper
+
   .square.enter
     %p return
 
   -# third row
   .square.shift
     %p shift
-  - 10.times do |num|
-    .key.square{ id: "4_row_#{num}" }
-      %p= num
+  - (37..46).each do |num|
+    .key.square{ id: "key_#{num}" }
+      %p.lower
+      %p.upper
+
   .square.shift
     %p shift
 
