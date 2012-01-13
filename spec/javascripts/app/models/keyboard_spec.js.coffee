@@ -22,6 +22,6 @@ describe 'Keyboard', ->
 
   it 'should fill key with upper and lower letter', ->
     loadFixtures('single_key')
-    $('.keyboard').fill_keyboard('dvorak')
+    $('#keyboard').fill_keyboard('dvorak')
     expect($('.lower').html()).toEqual('s')
     expect($('.upper').html()).toEqual('a')

@@ -1,2 +1,2 @@
 $ ->
-  $('.keyboard').fill_keyboard('dvorak')
+  $('#keyboard').fill_keyboard('dvorak')
