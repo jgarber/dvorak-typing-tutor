@@ -26,4 +26,4 @@ class App extends Spine.Controller
 window.App = App
 
 $ ->
-  window.App = new window.App
+  window.app = new window.App

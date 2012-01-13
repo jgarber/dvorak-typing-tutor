@@ -1,6 +1,6 @@
-class Keyboard
+class App.Keyboard
   constructor: ->
-    @layout         = Layouts
+    @layout         = App.Layouts
     @count          = 47
     @current_layout = null
 
@@ -20,6 +20,3 @@ class Keyboard
         if key
           key.children('.lower').html(@get_array(layout, 'lowercase')[i])
           key.children('.upper').html(@get_array(layout, 'uppercase')[i])
-
-
-@Keyboard = new Keyboard

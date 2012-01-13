@@ -9,7 +9,6 @@ class App.InputController extends Spine.Controller
   constructor: ->
     super
     @tmp_html = @el.html()
-    console.log @eventSpliter
 
   keydown: (event) ->
     if event.which == 16

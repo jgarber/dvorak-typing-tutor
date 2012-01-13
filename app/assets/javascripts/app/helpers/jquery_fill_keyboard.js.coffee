@@ -1,2 +1,2 @@
 $.fn.fill_keyboard = (layout) ->
-  Keyboard.fill_keyboard(this, layout)
+  app.keyboard_controller.keyboard.fill_keyboard(this, layout)

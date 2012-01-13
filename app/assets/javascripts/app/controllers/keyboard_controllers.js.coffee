@@ -9,4 +9,5 @@ class App.KeyboardController extends Spine.Controller
 
   constructor: ->
     super
-    @el.fill_keyboard('dvorak')
+    @keyboard = new App.Keyboard
+    @keyboard.fill_keyboard(@el, 'dvorak')
