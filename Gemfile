@@ -19,7 +19,6 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-jasmine'
   gem 'cucumber-rails'
-  gem 'jasmine-rails'
   gem 'jasminerice'
   gem 'spork'
 end
