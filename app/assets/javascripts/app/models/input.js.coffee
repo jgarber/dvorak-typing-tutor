@@ -1,12 +1,12 @@
 class App.Input
   constructor: ->
     @el = $('#input_box')
-    Spine.bind('input_box:shift_pressed', @shift_pressed)
     @_diff = new diff_match_patch()
 
+    Spine.bind('input_box:shift_pressed',  @shift_pressed)
     Spine.bind('input_box:shift_released', @shift_released)
     Spine.bind('input_box:return_pressed', @return_pressed)
-    Spine.bind('input_box:changed', @changed)
+    Spine.bind('input_box:changed',        @changed)
 
   move_cursor: =>
     nodes = @el.childNodes
