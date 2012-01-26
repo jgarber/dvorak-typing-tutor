@@ -18,8 +18,9 @@ class App extends Spine.Controller
 
   constructor: ->
     super
-    @input_controller = new App.InputController
+    @input_controller    = new App.InputController
     @keyboard_controller = new App.KeyboardController
+    @lesson_controller   = new App.LessonController
 
     Spine.Route.setup()
 
