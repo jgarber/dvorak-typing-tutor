@@ -20,3 +20,12 @@ class App.Keyboard
         if key
           key.children('.lower').html(@get_array(layout, 'lowercase')[i])
           key.children('.upper').html(@get_array(layout, 'uppercase')[i])
+
+  upcase: ->
+    $('.keyboard > .key > .lower').hide()
+    $('.keyboard > .key > .upper').show()
+
+  downcase: ->
+    $('.keyboard > .key > .lower').show()
+    $('.keyboard > .key > .upper').hide()
+
