@@ -34,6 +34,10 @@ div {
   border: 2px solid grey;
   padding: 50px;
   font-weight: bold;
+
+  .error {
+    color: red;
+  }
 }
 
 .keyboard {
