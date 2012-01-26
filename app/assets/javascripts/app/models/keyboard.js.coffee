@@ -1,4 +1,4 @@
-class App.Keyboard
+class App.Keyboard extends App.Base
   constructor: ->
     @layout         = App.Layouts
     @count          = 47

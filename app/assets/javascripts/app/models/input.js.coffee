@@ -1,4 +1,4 @@
-class App.Input
+class App.Input extends App.Base
   constructor: ->
     @el = $('#input_box')
     @_diff = new diff_match_patch()

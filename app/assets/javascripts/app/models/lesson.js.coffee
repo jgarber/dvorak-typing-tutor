@@ -1,4 +1,4 @@
-class App.Lesson
+class App.Lesson extends App.Base
   constructor: ->
     @_current = 'Some string here'
 
