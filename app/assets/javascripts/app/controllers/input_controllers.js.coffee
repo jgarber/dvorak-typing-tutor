@@ -9,7 +9,7 @@ class App.InputController extends Spine.Controller
   constructor: ->
     super
     @tmp_html = @el.html()
-    @input = new App.Input
+    @input = new App.Input(@el)
 
   keydown: (event) ->
     if event.which == 16

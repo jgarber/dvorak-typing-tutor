@@ -1,6 +1,6 @@
 class App.Lesson extends App.Base
-  constructor: ->
-    @el = $('#lessons_box')
+  constructor: (el) ->
+    @el = el
     @_current = 0
     @lessons = []
 

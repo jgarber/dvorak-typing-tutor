@@ -1,6 +1,6 @@
 class App.Input extends App.Base
-  constructor: ->
-    @el = $('#input_box')
+  constructor: (el) ->
+    @el = el
     @_diff = new diff_match_patch()
 
     Spine.bind('input_box:shift_pressed',  @shift_pressed)

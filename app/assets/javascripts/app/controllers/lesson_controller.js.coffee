@@ -9,4 +9,4 @@ class App.LessonController extends Spine.Controller
 
   constructor: ->
     super
-    @lesson = new App.Lesson
+    @lesson = new App.Lesson(@el)

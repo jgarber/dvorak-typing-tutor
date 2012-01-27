@@ -1,8 +1,9 @@
 class App.Keyboard extends App.Base
-  constructor: ->
+  constructor: (el) ->
     @layout         = App.Layouts
     @count          = 47
     @current_layout = null
+    @el             = el
 
   get_layout: (layout, _case) =>
     if @layout[layout]
@@ -12,7 +13,7 @@ class App.Keyboard extends App.Base
     if @get_layout(layout, _case)
       @get_layout(layout, _case).split('')
 
-  fill_keyboard: (elem, layout) =>
+  fill_keyboard: (layout) =>
     if @get_array(layout)
       @current_layout = layout
       for i in [0..(@count - 1)]
