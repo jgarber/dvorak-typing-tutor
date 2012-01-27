@@ -1,5 +1,5 @@
 class App.TimerController extends Spine.Controller
-  el: '#lesson_box'
+  el: '#timer'
 
   constructor: ->
     super

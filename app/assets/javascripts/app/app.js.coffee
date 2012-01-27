@@ -21,6 +21,7 @@ class App extends Spine.Controller
     @input_controller    = new App.InputController
     @keyboard_controller = new App.KeyboardController
     @lesson_controller   = new App.LessonController
+    @timer_controller    = new App.TimerController
 
     Spine.Route.setup()
 
