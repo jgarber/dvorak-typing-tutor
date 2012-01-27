@@ -21,11 +21,21 @@ div {
   border-left: 2px solid grey;
   border-right: 2px solid grey;
   border-radius: 0;
-  margin-bottom: 30px;
 
   .sentence {
     height: 33%;
   }
+}
+
+.timer {
+  position: relative;
+  margin: 0 auto;
+  top: -200px;
+  left: 325px;
+  width: 50px;
+  border: 2px solid grey;
+  padding: 10px;
+  text-align: center;
 }
 
 .input_box {
