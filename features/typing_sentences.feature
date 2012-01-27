@@ -1,3 +1,4 @@
+@javascript
 Feature: Practice typing sentences
   In order to improve my typing speed
   As a Dvorak keyboard learner

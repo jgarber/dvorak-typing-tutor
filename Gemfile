@@ -22,3 +22,8 @@ group :development, :test do
   gem 'jasminerice'
   gem 'spork'
 end
+
+group :test do
+  gem 'launchy'
+  gem 'capybara-webkit'
+end
