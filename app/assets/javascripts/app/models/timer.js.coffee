@@ -32,9 +32,18 @@ class App.Timer extends App.Base
     else
       if _hours   < 10
         _hours   = "0#{_hours}:"
+      else
+        _hours   = "#{_hours}:"
 
-    _minutes = "0#{_minutes}:" if _minutes < 10
-    _seconds = "0#{_seconds}"  if _seconds < 10
+    if _minutes < 10
+      _minutes = "0#{_minutes}:"
+    else
+      _minutes = "#{_minutes}:"
+
+    if _seconds < 10
+      _seconds = "0#{_seconds}"
+    else
+      _seconds = "#{_seconds}"
 
     str = "#{_hours}#{_minutes}#{_seconds}"
     @el.html(str)
