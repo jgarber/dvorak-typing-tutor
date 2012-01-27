@@ -11,7 +11,8 @@ class App.Timer extends App.Base
     unless @_stop
       @timeout_id = setTimeout(@timeout, 1000)
     else
-      @_stop = false
+      @_stop   = false
+      @running = false
 
   stop: =>
     @_stop = true
