@@ -27,12 +27,14 @@ Feature: Learn the first keys
       heath
       """
 
+  @focus
   Scenario: Starting the lesson
-    When I begin the lesson
+    When voice method was stubbed
+    And I begin the lesson
     Then the timer should not be running
     And the input box should be blank
     And the voice should say "a"
-    And the example loupe should say "a↵"
+    And the example loupe should say "a"
 
   Scenario: Typing the first characters
     Given I have begun the lesson

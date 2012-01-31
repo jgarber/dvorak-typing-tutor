@@ -37,6 +37,24 @@ class App.Input extends App.Base
       else # must be typo in input
         @highlight_typos(diff)
 
+  highlight_next: =>
+    content = @stripped_content() || ''
+
+    if (content.length > 0)
+      diff = @diff(
+        content,
+        app.lesson_controller.lesson.current()
+      )
+
+      str = diff[diff.length - 1][1]
+    else
+      str = app.lesson_controller.lesson.current()
+
+    next_letter = str[0]
+
+    #app.keyboard_controller.keyboard.highlight_next(next_letter)
+    app.voice.say(next_letter)
+
   diff: (str1, str2) =>
     @_diff.diff_main(str1, str2)
 
@@ -57,5 +75,7 @@ class App.Input extends App.Base
       if match[0] == 0
         html += match[1]
 
-    @el.html(html)
-    @move_cursor()
+    @save_position()
+    #@el.html(html)
+    console.log(@el.html())
+    @restore_position()

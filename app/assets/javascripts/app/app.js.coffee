@@ -25,9 +25,17 @@ class App extends Spine.Controller
     @lesson_controller   = new App.LessonController
     @timer_controller    = new App.TimerController
 
+    @voice               = new App.Voice
+
     Spine.Route.setup()
+
+  start: =>
+    @lesson_controller.lesson.set_all()
+    @input_controller.input.highlight_next()
+
 
 window.App = App
 
 $ ->
   window.app = new window.App
+  window.app.start()
