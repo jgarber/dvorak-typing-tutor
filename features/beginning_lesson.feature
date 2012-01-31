@@ -29,8 +29,7 @@ Feature: Learn the first keys
 
   @focus
   Scenario: Starting the lesson
-    When voice method was stubbed
-    And I begin the lesson
+    When I begin the lesson
     Then the timer should not be running
     And the input box should be blank
     And the voice should say "a"
@@ -47,16 +46,18 @@ Feature: Learn the first keys
     And the voice should say "at"
     And the example loupe should say "at"
 
+  @focus
   Scenario: Needing help finding a key
     When I begin the lesson
     And I hesitate
-    Then the A key should be highlighted on the virtual keyboard
-    And the voice should say "The A key is on the home row, under your left little finger."
-    When I type "a\n"
+    Then the a key should be highlighted on the virtual keyboard
+    And the voice should say "The a key is on the home row, under your left little finger."
+    When I type "a"
+    And I press return
     And I type "a"
     And I hesitate
-    Then the T key should be highlighted on the virtual keyboard
-    And the voice should say "The T key is on the home row, under your right middle finger."
+    Then the t key should be highlighted on the virtual keyboard
+    And the voice should say "The t key is on the home row, under your right middle finger."
 
   Scenario: Typing a wrong letter
     Given I have begun the lesson

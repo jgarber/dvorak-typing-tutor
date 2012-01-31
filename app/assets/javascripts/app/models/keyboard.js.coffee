@@ -22,6 +22,9 @@ class App.Keyboard extends App.Base
           key.children('.lower').html(@get_array(layout, 'lowercase')[i])
           key.children('.upper').html(@get_array(layout, 'uppercase')[i])
 
+  get_current_layout: (_case = 'lowercase') =>
+    @get_layout(@current_layout, _case)
+
   upcase: ->
     $('.keyboard > .key > .lower').hide()
     $('.keyboard > .key > .upper').show()
@@ -30,3 +33,27 @@ class App.Keyboard extends App.Base
     $('.keyboard > .key > .lower').show()
     $('.keyboard > .key > .upper').hide()
 
+  highlight_next: (letter) =>
+    $('.keyboard > div').removeClass('highlighted')
+
+    if letter == 'return'
+      $('.return').addClass('highlighted')
+    else
+      if letter == ' '
+        $('.space').addClass('highlighted')
+      else
+        layout = @get_current_layout('lowercase')
+        index = layout.indexOf(letter)
+
+        if index != -1
+          $("#key_#{index}").addClass('highlighted')
+        else
+          layout = @get_current_layout('uppercase')
+          index = layout.indexOf(letter)
+
+          if index != -1
+            $("#key_#{index}").addClass('highlighted')
+            $('.shift').addClass('highlighted')
+
+  highlight_return: =>
+    @highlight_next('return')

@@ -22,8 +22,13 @@ div {
   border-right: 2px solid grey;
   border-radius: 0;
 
+  .sentence:first-child {
+    padding-top: 63px;
+  }
+
   .sentence {
-    height: 33%;
+    height: 30px;
+    text-align: center;
   }
 }
 
@@ -86,6 +91,11 @@ div {
     }
   }
 
+  .highlighted {
+    color: white;
+    background-color: black;
+  }
+
   .bottom {
     height: 37px;
 
@@ -111,7 +121,7 @@ div {
     width: 55px;
   }
 
-  .caps, .enter {
+  .caps, .return {
     width: 63px;
   }
 

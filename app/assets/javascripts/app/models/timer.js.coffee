@@ -1,9 +1,13 @@
 class App.Timer extends App.Base
   constructor: (el) ->
-    @el = el
-    @running = false
-    @seconds = 0
-    @_stop = false
+    @el            = el
+    @running       = false
+    @seconds       = 0
+    @_stop         = false
+
+    @_last_changed = 0
+    Spine.bind('input_box:changed', @changed)
+    Spine.bind('input_box:return_pressed', @changed)
 
   start: =>
     @running = true
@@ -20,6 +24,7 @@ class App.Timer extends App.Base
   timeout: =>
     @seconds += 1
     @render()
+    @help()
     @start()
 
   render: =>
@@ -50,3 +55,11 @@ class App.Timer extends App.Base
     @el.html(str)
 
     str
+
+  changed: =>
+    @_last_changed = @seconds
+
+  help: =>
+    if @seconds - @_last_changed >= 5
+      @_last_changed = @seconds
+      app.voice.help()

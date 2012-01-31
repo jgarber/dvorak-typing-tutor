@@ -28,5 +28,5 @@ class App.Lesson extends App.Base
     @set_previous()
 
   go_next: =>
-    @_current =+ 1
+    @_current += 1
     @set_all()

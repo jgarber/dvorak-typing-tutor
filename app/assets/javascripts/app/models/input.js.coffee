@@ -36,12 +36,13 @@ class App.Input extends App.Base
         app.lesson_controller.lesson.current()
       )
 
-      if diff.length == 2 # all going ok
-        # highlight next letter here
-      else # must be typo in input
-        @highlight_typos(diff)
+      if @stripped_content() == app.lesson_controller.lesson.current()
+        app.keyboard_controller.keyboard.highlight_return()
+      else
+        @highlight_next()
+        @highlight_typos(diff) unless diff.length == 2
 
-  highlight_next: =>
+  next_string: =>
     content = @stripped_content() || ''
 
     if (content.length > 0)
@@ -54,10 +55,15 @@ class App.Input extends App.Base
     else
       str = app.lesson_controller.lesson.current()
 
+    str
+
+  next_letter: =>
+    str = @next_string()
     next_letter = str[0]
 
-    #app.keyboard_controller.keyboard.highlight_next(next_letter)
-    app.voice.say(str)
+  highlight_next: =>
+    app.keyboard_controller.keyboard.highlight_next(@next_letter())
+    app.voice.say(@next_string())
 
   diff: (str1, str2) =>
     @_diff.diff_main(str1, str2)
@@ -81,5 +87,5 @@ class App.Input extends App.Base
 
     @save_position()
     #@el.html(html)
-    console.log(@el.html())
+    #console.log(@el.html())
     @restore_position()

@@ -20,6 +20,7 @@ When /^voice method was stubbed$/ do
 end
 
 When /^I begin the lesson$/ do
+  step('voice method was stubbed')
   page.execute_script('app.start();')
 end
 
@@ -32,7 +33,8 @@ Then /^the input box should be blank$/ do
 end
 
 Then /^the voice should say "([^"]*)"$/ do |arg1|
-  page.evaluate_script('voice_debug[voice_debug.length > 0 ? voice_debug.length - 1 : 0]').should eql(arg1)
+  len = page.evaluate_script('voice_debug.length')
+  page.evaluate_script("voice_debug[#{len - 1}]").should eql(arg1)
 end
 
 Then /^the example loupe should say "([^"]*)"$/ do |arg1|
@@ -40,7 +42,6 @@ Then /^the example loupe should say "([^"]*)"$/ do |arg1|
 end
 
 Given /^I have begun the lesson$/ do
-  step('voice method was stubbed')
   step('I begin the lesson')
 end
 
@@ -68,15 +69,16 @@ When /^I press return$/ do
 end
 
 When /^I hesitate$/ do
-  pending # express the regexp above with the code you wish you had
+  page.execute_script('app.timer_controller.timer.seconds += 5;')
+  page.execute_script('app.timer_controller.timer.help();')
 end
 
-Then /^the A key should be highlighted on the virtual keyboard$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^the T key should be highlighted on the virtual keyboard$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^the (\w) key should be highlighted on the virtual keyboard$/ do |letter|
+  if letter.downcase.casecmp(letter) == 0
+    page.evaluate_script('$(".keyboard > .highlighted > .lower").html()').should eql(letter)
+  else
+    page.evaluate_script('$(".keyboard > .highlighted > .upper").html()').should eql(letter)
+  end
 end
 
 Then /^I should hear a warning beep$/ do
