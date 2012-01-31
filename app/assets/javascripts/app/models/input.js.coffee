@@ -8,17 +8,12 @@ class App.Input extends App.Base
     Spine.bind('input_box:return_pressed', @return_pressed)
     Spine.bind('input_box:changed',        @changed)
 
-  move_cursor: =>
-    nodes = @el.childNodes
-    count = nodes.length
-    range = document.createRange()
-    sel   = window.getSelection()
+  save_position: =>
+    @saved_position = rangy.saveSelection()
 
-    # set cursor position
-    range.setStart(nodes[count - 1], nodes[count - 1].length)
-    range.collapse(true)
-    sel.removeAllRanges()
-    sel.addRange(range)
+  restore_position: =>
+    rangy.restoreSelection(@saved_position)
+
 
   shift_pressed: =>
     app.keyboard_controller.keyboard.upcase()

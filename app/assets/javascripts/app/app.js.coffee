@@ -4,6 +4,8 @@
 #= require spine/manager
 #= require spine/ajax
 #= require spine/route
+#= require rangy/rangy-core
+#= require rangy/rangy-selectionsaverestore
 
 #= require_tree ./lib
 #= require_self
