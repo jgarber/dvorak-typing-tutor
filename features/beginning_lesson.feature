@@ -1,4 +1,4 @@
-@javascript
+@javascript @focus
 Feature: Learn the first keys
   In order to type faster
   By learning the Dvorak keyboard
@@ -27,7 +27,6 @@ Feature: Learn the first keys
       heath
       """
 
-  @focus
   Scenario: Starting the lesson
     When I begin the lesson
     Then the timer should not be running
@@ -35,7 +34,6 @@ Feature: Learn the first keys
     And the voice should say "a"
     And the example loupe should say "a"
 
-  @focus
   Scenario: Typing the first characters
     Given I have begun the lesson
     When I type "a"
@@ -46,7 +44,6 @@ Feature: Learn the first keys
     And the voice should say "at"
     And the example loupe should say "at"
 
-  @focus
   Scenario: Needing help finding a key
     When I begin the lesson
     And I hesitate
@@ -59,7 +56,6 @@ Feature: Learn the first keys
     Then the t key should be highlighted on the virtual keyboard
     And the voice should say "The t key is on the home row, under your right middle finger."
 
-  @focus
   Scenario: Typing a wrong letter
     Given I have begun the lesson
     When I type "o"
@@ -76,6 +72,8 @@ Feature: Learn the first keys
 
   Scenario: Ending the lesson
     Given I have begun the lesson
+    When I type "a"
+    Then the timer should be running
     When I type all of the example text verbatim
     Then the timer should be stopped
     And the timer should show me my elapsed time

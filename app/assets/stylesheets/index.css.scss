@@ -43,6 +43,17 @@ div {
   text-align: center;
 }
 
+.words_per_minute {
+  margin: 10px auto;
+  top: -195px;
+  left: 305px;
+  width: 370px;
+  border: 2px solid grey;
+  padding: 10px;
+  text-align: center;
+  display: none;
+}
+
 .input_box {
   width: 600px;
   height: 100px;

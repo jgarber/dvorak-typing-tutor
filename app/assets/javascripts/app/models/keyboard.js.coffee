@@ -37,23 +37,23 @@ class App.Keyboard extends App.Base
     $('.keyboard > div').removeClass('highlighted')
 
     if letter == 'return'
-      $('.return').addClass('highlighted')
+      $('.return').addClass('highlighted') 
     else
       if letter == ' '
-        $('.space').addClass('highlighted')
+        $('.space').addClass('highlighted') 
       else
         layout = @get_current_layout('lowercase')
         index = layout.indexOf(letter)
 
         if index != -1
-          $("#key_#{index}").addClass('highlighted')
+          $("#key_#{index}").addClass('highlighted') 
         else
           layout = @get_current_layout('uppercase')
           index = layout.indexOf(letter)
 
           if index != -1
-            $("#key_#{index}").addClass('highlighted')
-            $('.shift').addClass('highlighted')
+            $("#key_#{index}").addClass('highlighted') 
+            $('.shift').addClass('highlighted') 
 
   highlight_return: =>
     @highlight_next('return')

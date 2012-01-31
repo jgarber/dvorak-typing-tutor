@@ -119,19 +119,24 @@ Then /^nothing in the input box should be underlined$/ do
 end
 
 When /^I type all of the example text verbatim$/ do
-  pending # express the regexp above with the code you wish you had
+  len = page.evaluate_script('app.lesson_controller.lesson.lessons.length')
+  page.execute_script("app.lesson_controller.lesson._current = #{len - 1}")
+  page.execute_script("app.lesson_controller.lesson.go_next()")
 end
 
 Then /^the timer should be stopped$/ do
-  pending # express the regexp above with the code you wish you had
+  page.evaluate_script('app.timer_controller.timer.running').should be_false
 end
 
 Then /^the timer should show me my elapsed time$/ do
-  pending # express the regexp above with the code you wish you had
+  page.execute_script("app.timer_controller.timer.seconds = 15")
+  page.execute_script("app.timer_controller.timer.render()")
+  page.evaluate_script('$(".timer").html()').should eql('00:15')
 end
 
 Then /^I should see my words per minute$/ do
-  pending # express the regexp above with the code you wish you had
+  page.execute_script("app.timer_controller.timer.finish()")
+  page.evaluate_script('$("#words_per_minute").html()').should match(/1/)
 end
 
 Then /^the example loupe should contain "([^"]*)"$/ do |arg1|

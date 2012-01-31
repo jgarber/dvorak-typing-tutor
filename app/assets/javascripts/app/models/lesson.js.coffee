@@ -4,6 +4,8 @@ class App.Lesson extends App.Base
     @_current = 0
     @lessons = []
 
+    Spine.bind('app:finish', @finish)
+
   current: =>
     @lessons[@_current]
 
@@ -28,5 +30,13 @@ class App.Lesson extends App.Base
     @set_previous()
 
   go_next: =>
-    @_current += 1
-    @set_all()
+    if @_current == @lessons.length - 1
+      Spine.trigger('app:finish')
+    else
+      @_current += 1
+      @set_all()
+
+  finish: =>
+    @$('.current').html('')
+    @$('.next').html('')
+    @$('.previous').html('')

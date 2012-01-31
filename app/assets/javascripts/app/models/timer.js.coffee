@@ -8,24 +8,25 @@ class App.Timer extends App.Base
     @_last_changed = 0
     Spine.bind('input_box:changed', @changed)
     Spine.bind('input_box:return_pressed', @changed)
+    Spine.bind('app:finish', @finish)
 
   start: =>
     @running = true
-
-    unless @_stop
-      @timeout_id = setTimeout(@timeout, 1000)
-    else
-      @_stop   = false
-      @running = false
+    @timeout_id = setTimeout(@timeout, 1000)
 
   stop: =>
     @_stop = true
+    @running = false
 
   timeout: =>
-    @seconds += 1
-    @render()
-    @help()
-    @start()
+    unless @_stop
+      @seconds += 1
+      @render()
+      @help()
+      @start()
+    else
+      @_stop   = false
+      @running = false
 
   render: =>
     _minutes = (@seconds - @seconds % 60) / 60
@@ -63,3 +64,15 @@ class App.Timer extends App.Base
     if @seconds - @_last_changed >= 5
       @_last_changed = @seconds
       app.voice.help()
+
+  finish: =>
+    @stop()
+    @words_per_minute()
+
+  words_per_minute: =>
+    words = 0
+    for sample in app.lesson_controller.lesson.lessons
+      words += sample.split(' ').length
+
+    $('#words_per_minute').html("Words per minute: #{Math.ceil(words / @seconds / 60)}")
+    $('#words_per_minute').show()
