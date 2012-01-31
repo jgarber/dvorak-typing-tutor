@@ -24,8 +24,12 @@ class App.Input extends App.Base
   return_pressed: =>
     if app.lesson_controller.lesson.current() == @stripped_content()
       @el.html('')
+      app.lesson_controller.lesson.go_next()
+      @highlight_next()
 
   changed: =>
+    app.timer_controller.timer.start() unless app.timer_controller.timer.running
+
     if @stripped_content() && app.lesson_controller.lesson.current()
       diff = @diff(
         @stripped_content(),
@@ -53,7 +57,7 @@ class App.Input extends App.Base
     next_letter = str[0]
 
     #app.keyboard_controller.keyboard.highlight_next(next_letter)
-    app.voice.say(next_letter)
+    app.voice.say(str)
 
   diff: (str1, str2) =>
     @_diff.diff_main(str1, str2)

@@ -40,19 +40,31 @@ Then /^the example loupe should say "([^"]*)"$/ do |arg1|
 end
 
 Given /^I have begun the lesson$/ do
-  # nothing to do here
+  step('voice method was stubbed')
+  step('I begin the lesson')
 end
 
 When /^I type "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  page.execute_script(<<-EOS
+    $('#input_box').html('#{arg1}');
+    Spine.trigger('input_box:changed');
+  EOS
+  )
 end
 
 Then /^the timer should be running$/ do
-  pending # express the regexp above with the code you wish you had
+  page.evaluate_script('app.timer_controller.timer.running').should be_true
 end
 
 Then /^the input box should contain "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  page.evaluate_script('$("#input_box").html()').should eql(arg1)
+end
+
+When /^I press return$/ do
+  page.execute_script(<<-EOS
+    Spine.trigger('input_box:return_pressed');
+  EOS
+  )
 end
 
 When /^I hesitate$/ do

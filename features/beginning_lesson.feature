@@ -36,15 +36,16 @@ Feature: Learn the first keys
     And the voice should say "a"
     And the example loupe should say "a"
 
+  @focus
   Scenario: Typing the first characters
     Given I have begun the lesson
     When I type "a"
     Then the timer should be running
     And the input box should contain "a"
-    When I type "\n"
-    Then the input box should contain "a\n"
+    When I press return
+    Then the input box should be blank
     And the voice should say "at"
-    And the example loupe should say "at↵"
+    And the example loupe should say "at"
 
   Scenario: Needing help finding a key
     When I begin the lesson
