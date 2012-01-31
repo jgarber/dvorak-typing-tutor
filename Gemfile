@@ -28,4 +28,5 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'rspec'
+  gem 'sanitize'
 end
