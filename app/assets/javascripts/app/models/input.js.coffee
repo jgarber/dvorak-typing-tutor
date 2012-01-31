@@ -40,7 +40,10 @@ class App.Input extends App.Base
         app.keyboard_controller.keyboard.highlight_return()
       else
         @highlight_next()
-        @highlight_typos(diff) unless diff.length == 2
+        console.log(diff)
+        if diff.length != 2 || diff[0][0] == -1
+          app.voice.beep()
+          @highlight_typos(diff)
 
   next_string: =>
     content = @stripped_content() || ''
@@ -85,7 +88,6 @@ class App.Input extends App.Base
       if match[0] == 0
         html += match[1]
 
-    @save_position()
-    #@el.html(html)
-    #console.log(@el.html())
-    @restore_position()
+    #@save_position()
+    @el.html(html)
+    #@restore_position()

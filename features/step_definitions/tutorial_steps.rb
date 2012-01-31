@@ -19,8 +19,23 @@ When /^voice method was stubbed$/ do
   page.evaluate_script('voice_debug.length').should eql(0)
 end
 
+When /^beep method was stubbed$/ do
+  page.execute_script(<<-EOS
+    beep_debug = false;
+
+    $(function() {
+      app.voice.beep = function() {
+        beep_debug = true;
+      }
+    });
+  EOS
+  )
+  page.evaluate_script('voice_debug.length').should eql(0)
+end
+
 When /^I begin the lesson$/ do
   step('voice method was stubbed')
+  step('beep method was stubbed')
   page.execute_script('app.start();')
 end
 
@@ -58,7 +73,7 @@ Then /^the timer should be running$/ do
 end
 
 Then /^the input box should contain "([^"]*)"$/ do |arg1|
-  page.evaluate_script('$("#input_box").html()').should eql(arg1)
+  Sanitize.clean(page.evaluate_script('$("#input_box").html()')).should eql(arg1)
 end
 
 When /^I press return$/ do
@@ -82,19 +97,25 @@ Then /^the (\w) key should be highlighted on the virtual keyboard$/ do |letter|
 end
 
 Then /^I should hear a warning beep$/ do
-  pending # express the regexp above with the code you wish you had
+  page.evaluate_script('beep_debug').should be_true
+  page.execute_script('beep_bedug = false;')
 end
 
 Then /^the "([^"]*)" in the input box should be underlined$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  page.evaluate_script('$(".error").html()').should eql(arg1)
 end
 
 When /^I backspace$/ do
-  pending # express the regexp above with the code you wish you had
+  html = Sanitize.clean(page.evaluate_script('$(".error").html()'))
+  page.execute_script(<<-EOS
+    $('#input_box').html('#{html[0..-2]}');
+    Spine.trigger('input_box:changed');
+  EOS
+  )
 end
 
 Then /^nothing in the input box should be underlined$/ do
-  pending # express the regexp above with the code you wish you had
+  page.evaluate_script('$(".error").html()').should be_blank
 end
 
 When /^I type all of the example text verbatim$/ do
@@ -114,17 +135,5 @@ Then /^I should see my words per minute$/ do
 end
 
 Then /^the example loupe should contain "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^the R key should be highlighted on the virtual keyboard$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^the U key should be highlighted on the virtual keyboard$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^the K key should be highlighted on the virtual keyboard$/ do
   pending # express the regexp above with the code you wish you had
 end

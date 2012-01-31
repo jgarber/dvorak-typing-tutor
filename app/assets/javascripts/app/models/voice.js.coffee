@@ -3,6 +3,10 @@ class App.Voice
     #if console && console.log
       #console.log(string)
 
+  beep: ->
+    #if console && console.log
+      #console.log('beep')
+
   help: =>
       letter = app.input_controller.input.next_letter()
       if app.keyboard_controller.keyboard.current_layout == 'dvorak'

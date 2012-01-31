@@ -59,17 +59,19 @@ Feature: Learn the first keys
     Then the t key should be highlighted on the virtual keyboard
     And the voice should say "The t key is on the home row, under your right middle finger."
 
+  @focus
   Scenario: Typing a wrong letter
     Given I have begun the lesson
     When I type "o"
     Then I should hear a warning beep
     And the input box should contain "o"
     And the "o" in the input box should be underlined
-    And the example loupe should say "a↵"
+    And the example loupe should say "a"
     When I backspace
-    And I type "a\n"
-    Then the input box should contain "a\n"
-    And the example loupe should say "at↵"
+    And I type "a"
+    Then the input box should contain "a"
+    When I press return
+    And the example loupe should say "at"
     And nothing in the input box should be underlined
 
   Scenario: Ending the lesson
