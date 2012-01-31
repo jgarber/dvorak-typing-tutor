@@ -1,4 +1,4 @@
-@javascript @focus
+@javascript
 Feature: Learn the first keys
   In order to type faster
   By learning the Dvorak keyboard

@@ -62,7 +62,7 @@ end
 
 When /^I type "([^"]*)"$/ do |arg1|
   page.execute_script(<<-EOS
-    $('#input_box').html('#{arg1}');
+    $('#input_box').append('#{arg1}');
     Spine.trigger('input_box:changed');
   EOS
   )
@@ -106,7 +106,7 @@ Then /^the "([^"]*)" in the input box should be underlined$/ do |arg1|
 end
 
 When /^I backspace$/ do
-  html = Sanitize.clean(page.evaluate_script('$(".error").html()'))
+  html = Sanitize.clean(page.evaluate_script('$("#input_box").html()'))
   page.execute_script(<<-EOS
     $('#input_box').html('#{html[0..-2]}');
     Spine.trigger('input_box:changed');
@@ -137,8 +137,4 @@ end
 Then /^I should see my words per minute$/ do
   page.execute_script("app.timer_controller.timer.finish()")
   page.evaluate_script('$("#words_per_minute").html()').should match(/1/)
-end
-
-Then /^the example loupe should contain "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
 end

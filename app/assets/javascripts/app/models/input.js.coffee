@@ -40,7 +40,6 @@ class App.Input extends App.Base
         app.keyboard_controller.keyboard.highlight_return()
       else
         @highlight_next()
-        console.log(diff)
         if diff.length != 2 || diff[0][0] == -1
           app.voice.beep()
           @highlight_typos(diff)

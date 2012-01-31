@@ -17,3 +17,9 @@ class App.Voice
       @say("The #{letter} key is on the home row, under your left little finger.")
     if ['t'].indexOf(letter) != -1
       @say("The #{letter} key is on the home row, under your right middle finger.")
+    if['r'].indexOf(letter) != -1
+      @say("Right ring finger up.")
+    if['u'].indexOf(letter) != -1
+      @say("Left index finger.")
+    if['k'].indexOf(letter) != -1
+      @say("Left index finger down.")
