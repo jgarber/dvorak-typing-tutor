@@ -32,6 +32,7 @@ class App.Lesson extends App.Base
   go_next: =>
     if @_current == @lessons.length - 1
       Spine.trigger('app:finish')
+      stop_timer()
     else
       @_current += 1
       @set_all()

@@ -39,3 +39,6 @@ window.App = App
 $ ->
   window.app = new window.App
   window.app.start()
+
+@stop_timer = ->
+  window._break_timer = true

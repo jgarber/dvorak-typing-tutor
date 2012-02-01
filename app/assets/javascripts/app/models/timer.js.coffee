@@ -3,7 +3,6 @@ class App.Timer extends App.Base
     @el            = el
     @running       = false
     @seconds       = 0
-    @_stop         = false
 
     @_last_changed = 0
     Spine.bind('input_box:changed', @changed)
@@ -12,21 +11,25 @@ class App.Timer extends App.Base
 
   start: =>
     @running = true
-    @timeout_id = setTimeout(@timeout, 1000)
+    window._break_timer = false
+    @set_timeout()
 
-  stop: =>
-    @_stop = true
-    @running = false
+  set_timeout: =>
+    @timeout_id = setTimeout(@timeout, 1000) if @running
 
-  timeout: =>
-    unless @_stop
-      @seconds += 1
-      @render()
-      @help()
-      @start()
+  stop: ->
+    stop_timer()
+
+  timeout: ->
+    _timer = @app.timer_controller.timer
+
+    unless @_break_timer
+      _timer.seconds += 1
+      _timer.render()
+      _timer.help()
+      _timer.set_timeout()
     else
-      @_stop   = false
-      @running = false
+      _timer.running = false
 
   render: =>
     _minutes = (@seconds - @seconds % 60) / 60
@@ -66,7 +69,6 @@ class App.Timer extends App.Base
       app.voice.help()
 
   finish: =>
-    @stop()
     @words_per_minute()
 
   words_per_minute: =>
