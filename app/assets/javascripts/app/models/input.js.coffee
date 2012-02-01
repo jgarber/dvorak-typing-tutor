@@ -61,7 +61,7 @@ class App.Input extends App.Base
 
   next_letter: =>
     str = @next_string()
-    next_letter = str[0]
+    next_letter = str[0] if str
 
   highlight_next: =>
     app.keyboard_controller.keyboard.highlight_next(@next_letter())
