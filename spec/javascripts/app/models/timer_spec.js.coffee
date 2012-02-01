@@ -26,3 +26,21 @@ describe 'Timer', ->
   it 'should render 11 hour to string', ->
     timer.seconds = 11 * 60 * 60
     expect(timer.render()).toEqual('11:00:00')
+
+  it 'should calculate words per minute', ->
+    loadFixtures('words_per_minute')
+    expect($('#words_per_minute:visible').length).toEqual(0)
+
+    app.lesson_controller.lesson.lessons = [
+      'some three words',
+      'two words',
+      'and finally four words'
+    ]
+
+    timer.seconds = 60
+    timer.words_per_minute()
+
+    expect($('#words_per_minute:visible').length).toEqual(1)
+    expect($('#words_per_minute').html()).toContain(9)
+
+

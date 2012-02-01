@@ -135,6 +135,7 @@ Then /^the timer should show me my elapsed time$/ do
 end
 
 Then /^I should see my words per minute$/ do
+  page.execute_script("app.timer_controller.timer.seconds = 60")
   page.execute_script("app.timer_controller.timer.finish()")
-  page.evaluate_script('$("#words_per_minute").html()').should match(/1/)
+  page.evaluate_script('$("#words_per_minute").html()').should match(/17/)
 end

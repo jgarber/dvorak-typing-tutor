@@ -12,7 +12,8 @@ Feature: Practice typing sentences
       that a single man
       in possession
       of a good fortune,
-      must be |in want of a wife.
+      must be
+      in want of a wife.
       """
 
   Scenario: Starting the lesson
