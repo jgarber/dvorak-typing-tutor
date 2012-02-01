@@ -28,8 +28,6 @@ class App.Input extends App.Base
       @highlight_next()
 
   changed: =>
-    app.timer_controller.timer.start() unless app.timer_controller.timer.running
-
     if @stripped_content() && app.lesson_controller.lesson.current()
       diff = @diff(
         @stripped_content(),
