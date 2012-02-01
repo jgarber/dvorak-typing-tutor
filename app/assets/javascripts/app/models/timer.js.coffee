@@ -82,5 +82,5 @@ class App.Timer extends App.Base
     for sample in app.lesson_controller.lesson.lessons
       words += sample.split(' ').length
 
-    $('#words_per_minute').html("Words per minute: #{Math.ceil(words / @seconds / 60)}")
+    $('#words_per_minute').html("Words per minute: #{Math.ceil(words / (@seconds / 60))}")
     $('#words_per_minute').show()
