@@ -42,3 +42,4 @@ $ ->
 
 @stop_timer = ->
   window._break_timer = true
+  app.timer_controller.timer.running = false

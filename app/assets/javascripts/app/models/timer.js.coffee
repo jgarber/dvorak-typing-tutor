@@ -28,8 +28,6 @@ class App.Timer extends App.Base
       _timer.render()
       _timer.help()
       _timer.set_timeout()
-    else
-      _timer.running = false
 
   render: =>
     _minutes = (@seconds - @seconds % 60) / 60
