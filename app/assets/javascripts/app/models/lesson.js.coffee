@@ -2,7 +2,7 @@ class App.Lesson extends App.Base
   constructor: (el) ->
     @el = el
     @_current = 0
-    @lessons = []
+    @lessons = ['a', 'o']
 
     Spine.bind('app:finish', @finish)
 
@@ -16,13 +16,13 @@ class App.Lesson extends App.Base
     @lessons[@_current - 1]
 
   set_current: =>
-    @$('.current').html(@current())
+    @$('.current').html(@current() || '')
 
   set_next: =>
-    @$('.next').html(@next())
+    @$('.next').html(@next() || '')
 
   set_previous: =>
-    @$('.previous').html(@previous())
+    @$('.previous').html(@previous() || '')
 
   set_all: =>
     @set_next()
