@@ -1,7 +1,6 @@
 class App.Input extends App.Base
   constructor: (el) ->
     @el = el
-    @_diff = new diff_match_patch()
 
     Spine.bind('input_box:shift_pressed',  @shift_pressed)
     Spine.bind('input_box:shift_released', @shift_released)
@@ -29,29 +28,22 @@ class App.Input extends App.Base
 
   changed: =>
     if @stripped_content() && app.lesson_controller.lesson.current()
-      diff = @diff(
-        @stripped_content(),
-        app.lesson_controller.lesson.current()
-      )
 
       if @stripped_content() == app.lesson_controller.lesson.current()
         app.keyboard_controller.keyboard.highlight_return()
       else
         @highlight_next()
-        if diff.length != 2 || diff[0][0] == -1
+        errors = @errors()
+        @highlight_typos(errors)
+        if errors.present
           app.voice.beep()
-          @highlight_typos(diff)
 
   next_string: =>
     content = @stripped_content() || ''
 
-    if (content.length > 0)
-      diff = @diff(
-        content,
-        app.lesson_controller.lesson.current()
-      )
-
-      str = diff[diff.length - 1][1]
+    if content.length > 0
+      regexp = new RegExp("^#{content}", 'i')
+      str = app.lesson_controller.lesson.current().replace(regexp, '')
     else
       str = app.lesson_controller.lesson.current()
 
@@ -59,32 +51,72 @@ class App.Input extends App.Base
 
   next_letter: =>
     str = @next_string()
-    next_letter = str[0] if str
+
+    if str
+      next_letter = str[0]
+    else
+      false
 
   highlight_next: =>
     app.keyboard_controller.keyboard.highlight_next(@next_letter())
     app.voice.say(@next_string())
 
-  diff: (str1, str2) =>
-    @_diff.diff_main(str1, str2)
-
   strip: (html) ->
    tmp = document.createElement("DIV")
    tmp.innerHTML = html
-   tmp.textContent ||tmp.innerText
+   tmp.textContent || tmp.innerText
 
   stripped_content: =>
-    @strip(@el.html())
+    out = @strip(@el.html())
+    return out.replace(@strip('&#65279;'), '') if out # clear from rangy meta characters
+    return out
 
-  highlight_typos: (diff) =>
-    html = ''
+  errors: =>
+    current = app.lesson_controller.lesson.current().split(' ')
+    input = @stripped_content().split(' ')
 
-    for match in diff
-      if match[0] == -1
-        html += "<span class='error'>#{match[1]}</span>"
-      if match[0] == 0
-        html += match[1]
+    out = {
+      words: []
+      present: false
+    }
 
-    #@save_position()
-    @el.html(html)
-    #@restore_position()
+    for i in [0..(input.length - 1)]
+      regexp = new RegExp("^#{input[i]}", 'i')
+      if input[i].length > 0
+        unless regexp.test(current[i])
+          out.words.push([-1, input[i]])
+          out.present = true
+        else
+          out.words.push([0, input[i]])
+
+    out
+
+  highlight_typos: (errors) =>
+    @save_position() # creates hidden element in div
+    html = @stripped_content()
+
+    # get caret mark element
+    mark_el = @$('.rangySelectionBoundary').outerHTML()
+    # get caret mark position
+    mark = @strip(@el.html()).match(@strip('&#65279;'))
+    # insper caret mark on previous position
+    html = "#{html.substr(0, mark.index)}#{mark_el}#{html.substr(mark.index)}"
+
+    for word in errors.words
+      # highlight typo
+      if word[0] == -1
+        # FIXME still can repsace some data in html tags, or wrong word
+        regexp = new RegExp("#{word[1]}", 'i')
+        # replace typo with typo wrapped in span.error
+        html = html.replace(regexp, "<span class='error'>#{word[1]}</span>")
+
+    # swap html in div
+    @el.html(@hacks_for_browsers(html))
+    # restore caret position
+    @restore_position()
+
+  hacks_for_browsers: (html) ->
+    if navigator.userAgent.match('Mozilla')
+      html += '<br _moz_dirty="">'
+
+    html

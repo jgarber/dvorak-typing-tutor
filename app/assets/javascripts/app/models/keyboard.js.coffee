@@ -5,6 +5,8 @@ class App.Keyboard extends App.Base
     @current_layout = null
     @el             = el
 
+    Spine.bind('app:finish', @clear_highlighting)
+
   get_layout: (layout, _case) =>
     if @layout[layout]
       @layout[layout][_case]
@@ -33,8 +35,11 @@ class App.Keyboard extends App.Base
     $('.keyboard > .key > .lower').show()
     $('.keyboard > .key > .upper').hide()
 
-  highlight_next: (letter) =>
+  clear_highlighting: ->
     $('.keyboard > div').removeClass('highlighted')
+
+  highlight_next: (letter) =>
+    @clear_highlighting()
 
     if letter == 'return'
       $('.return').addClass('highlighted') 
