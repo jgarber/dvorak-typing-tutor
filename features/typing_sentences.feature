@@ -54,7 +54,7 @@ Feature: Practice typing sentences
     When I type "It in"
     Then I should hear a warning beep
     And the input box should contain "It in"
-    And the "n" in the input box should be underlined
+    And the "in" in the input box should be underlined
     When I backspace
     And I type "s"
     Then the input box should contain "It is"

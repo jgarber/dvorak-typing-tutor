@@ -5,6 +5,19 @@ Given /^I have the following practice script:$/ do |string|
   page.execute_script(script)
 end
 
+When /^caret position methods was stubbed$/ do
+  page.execute_script(<<-EOS
+    $(function() {
+      app.input_controller.input.save_position = function() {
+      };
+      app.input_controller.input.restore_position = function() {
+      };
+    });
+  EOS
+  )
+  page.evaluate_script('voice_debug.length').should eql(0)
+end
+
 When /^voice method was stubbed$/ do
   page.execute_script(<<-EOS
     voice_debug = [];
@@ -36,6 +49,7 @@ end
 When /^I begin the lesson$/ do
   step('voice method was stubbed')
   step('beep method was stubbed')
+  step('caret position methods was stubbed')
   page.execute_script('app.start();')
 end
 
@@ -73,7 +87,7 @@ Then /^the timer should be running$/ do
 end
 
 Then /^the input box should contain "([^"]*)"$/ do |arg1|
-  Sanitize.clean(page.evaluate_script('$("#input_box").html()')).should eql(arg1)
+  html_content.should eql(arg1)
 end
 
 When /^I press return$/ do
@@ -106,7 +120,7 @@ Then /^the "([^"]*)" in the input box should be underlined$/ do |arg1|
 end
 
 When /^I backspace$/ do
-  html = Sanitize.clean(page.evaluate_script('$("#input_box").html()'))
+  html = html_content
   page.execute_script(<<-EOS
     $('#input_box').html('#{html[0..-2]}');
     Spine.trigger('input_box:changed');

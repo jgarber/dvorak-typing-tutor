@@ -28,7 +28,6 @@ class App.Input extends App.Base
 
   changed: =>
     if @stripped_content() && app.lesson_controller.lesson.current()
-
       if @stripped_content() == app.lesson_controller.lesson.current()
         app.keyboard_controller.keyboard.highlight_return()
       else
@@ -96,11 +95,14 @@ class App.Input extends App.Base
     html = @stripped_content()
 
     # get caret mark element
-    mark_el = @$('.rangySelectionBoundary').outerHTML()
-    # get caret mark position
-    mark = @strip(@el.html()).match(@strip('&#65279;'))
-    # insper caret mark on previous position
-    html = "#{html.substr(0, mark.index)}#{mark_el}#{html.substr(mark.index)}"
+    mark_el = @$('.rangySelectionBoundary')
+
+    if mark_el
+      mark_el = mark_el.outerHTML()
+      # get caret mark position
+      mark = @strip(@el.html()).match(@strip('&#65279;'))
+      # insper caret mark on previous position
+      html = "#{html.substr(0, mark.index)}#{mark_el}#{html.substr(mark.index)}" if mark
 
     for word in errors.words
       # highlight typo

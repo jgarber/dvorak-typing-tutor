@@ -10,7 +10,12 @@ require 'spork'
 Spork.prefork do
   require 'cucumber/rails'
   require 'rspec/expectations'
+  require 'capybara/firebug'
+
+  require_relative 'html_content'
+
   World(RSpec::Matchers)
+  World(HtmlContent)
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd
