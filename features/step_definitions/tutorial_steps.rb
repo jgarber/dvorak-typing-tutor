@@ -5,6 +5,12 @@ Given /^I have the following practice script:$/ do |string|
   page.execute_script(script)
 end
 
+Given /^I have the following lesson script:$/ do |string|
+  visit('/')
+  script = "app.lesson_controller.lesson.set_lesson('#{string}');"
+  page.execute_script(script)
+end
+
 When /^caret position methods was stubbed$/ do
   page.execute_script(<<-EOS
     $(function() {

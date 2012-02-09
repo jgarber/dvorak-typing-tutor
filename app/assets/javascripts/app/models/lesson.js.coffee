@@ -3,8 +3,13 @@ class App.Lesson extends App.Base
     @el = el
     @_current = 0
     @lessons = ['a', 'o']
+    @split_symbol = '|'
 
     Spine.bind('app:finish', @finish)
+
+  set_lesson: (lesson) =>
+    @lesson = lesson
+    @phrases = @lesson.split(@split_symbol)
 
   current: =>
     @phrases[@_current]

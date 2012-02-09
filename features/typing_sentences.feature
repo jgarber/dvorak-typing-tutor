@@ -5,15 +5,9 @@ Feature: Practice typing sentences
   I want to practice typing full sentences
 
   Background:
-    Given I have the following practice script:
+    Given I have the following lesson script:
       """
-      It is a truth
-      universally acknowledged,
-      that a single man
-      in possession
-      of a good fortune,
-      must be
-      in want of a wife.
+      It is a truth| universally acknowledged,| that a single man| in possession| of a good fortune,| must be| in want of a wife.
       """
 
   Scenario: Starting the lesson
@@ -30,8 +24,8 @@ Feature: Practice typing sentences
     When I type "t is a truth"
     Then the input box should contain "It is a truth"
     When I press return
-    Then the voice should say "universally acknowledged,"
-    And the example loupe should say "universally acknowledged,"
+    Then the voice should say " universally acknowledged,"
+    And the example loupe should say " universally acknowledged,"
 
   Scenario: Needing brief help finding a key
     When I begin the lesson
@@ -41,6 +35,7 @@ Feature: Practice typing sentences
     And the voice should say "Right ring finger up."
     When I type "ruth"
     When I press return
+    When I type " "
     And I hesitate
     Then the u key should be highlighted on the virtual keyboard
     And the voice should say "Left index finger."
