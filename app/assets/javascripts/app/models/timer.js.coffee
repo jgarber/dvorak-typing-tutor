@@ -79,7 +79,7 @@ class App.Timer extends App.Base
 
   words_per_minute: =>
     words = 0
-    for sample in app.lesson_controller.lesson.lessons
+    for sample in app.lesson_controller.lesson.phrases
       words += sample.split(' ').length
 
     $('#words_per_minute').html("Words per minute: #{Math.ceil(words / (@seconds / 60))}")

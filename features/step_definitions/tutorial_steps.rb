@@ -1,7 +1,7 @@
 Given /^I have the following practice script:$/ do |string|
   visit('/')
-  # app.lesson_controller.lesson.lessons = [''];
-  script = "app.lesson_controller.lesson.lessons = ['#{string.lines.to_a.map(&:chomp).join("', '")}'];"
+  # app.lesson_controller.lesson.phrases = [''];
+  script = "app.lesson_controller.lesson.phrases = ['#{string.lines.to_a.map(&:chomp).join("', '")}'];"
   page.execute_script(script)
 end
 
@@ -133,7 +133,7 @@ Then /^nothing in the input box should be underlined$/ do
 end
 
 When /^I type all of the example text verbatim$/ do
-  len = page.evaluate_script('app.lesson_controller.lesson.lessons.length')
+  len = page.evaluate_script('app.lesson_controller.lesson.phrases.length')
   page.execute_script("app.lesson_controller.lesson._current = #{len - 1}")
   page.execute_script("app.lesson_controller.lesson.go_next()")
 end

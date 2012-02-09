@@ -23,7 +23,7 @@ Feature: Practice typing sentences
     And the voice should say "It is a truth"
     And the example loupe should say "It is a truth"
 
-  Scenario: Typing the first phrase
+  Scenario: Typing the first lesson
     Given I have begun the lesson
     When I type "I"
     Then the timer should be running

@@ -31,7 +31,7 @@ describe 'Timer', ->
     loadFixtures('words_per_minute')
     expect($('#words_per_minute:visible').length).toEqual(0)
 
-    app.lesson_controller.lesson.lessons = [
+    app.lesson_controller.lesson.phrases = [
       'some three words',
       'two words',
       'and finally four words'
