@@ -29,7 +29,10 @@ class App.Input extends App.Base
   changed: =>
     if @stripped_content() && app.lesson_controller.lesson.current()
       if @stripped_content() == app.lesson_controller.lesson.current()
-        app.keyboard_controller.keyboard.highlight_return()
+        if app.lesson_controller.lesson.is_last()
+          Spine.trigger('app:finish')
+        else
+          app.keyboard_controller.keyboard.highlight_return()
       else
         @highlight_next()
         errors = @errors()

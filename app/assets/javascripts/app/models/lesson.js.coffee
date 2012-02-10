@@ -46,3 +46,6 @@ class App.Lesson extends App.Base
     @$('.current').html('')
     @$('.next').html('')
     @$('.previous').html('')
+
+  is_last: =>
+    @_current == @phrases.length - 1
