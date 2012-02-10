@@ -33,6 +33,7 @@ class App.Lesson extends App.Base
     @set_next()
     @set_current()
     @set_previous()
+    app.voice.say_phrase(@current())
 
   go_next: =>
     if @_current == @phrases.length - 1

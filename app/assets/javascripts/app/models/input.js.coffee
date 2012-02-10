@@ -58,7 +58,6 @@ class App.Input extends App.Base
 
   highlight_next: =>
     app.keyboard_controller.keyboard.highlight_next(@next_letter())
-    app.voice.say(@next_string())
 
   strip: (html) ->
    tmp = document.createElement("DIV")
