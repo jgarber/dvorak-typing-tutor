@@ -1,7 +1,9 @@
 class App.Voice
-  say: (string) ->
-    if console && console.log
-      console.log(string)
+  constructor: ->
+    @voice_debug = []
+
+  say: (string) =>
+    @voice_debug.push(string)
 
   say_phrase: (string, index) =>
     if string != @last_sayed_phrase || index != @last_sayed_index

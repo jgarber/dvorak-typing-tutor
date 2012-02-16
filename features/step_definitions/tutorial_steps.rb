@@ -21,21 +21,6 @@ When /^caret position methods was stubbed$/ do
     });
   EOS
   )
-  page.evaluate_script('voice_debug.length').should eql(0)
-end
-
-When /^voice method was stubbed$/ do
-  page.execute_script(<<-EOS
-    voice_debug = [];
-
-    $(function() {
-      app.voice.say = function(string) {
-        voice_debug.push(string);
-      }
-    });
-  EOS
-  )
-  page.evaluate_script('voice_debug.length').should eql(0)
 end
 
 When /^beep method was stubbed$/ do
@@ -49,11 +34,9 @@ When /^beep method was stubbed$/ do
     });
   EOS
   )
-  page.evaluate_script('voice_debug.length').should eql(0)
 end
 
 When /^I begin the lesson$/ do
-  step('voice method was stubbed')
   step('beep method was stubbed')
   step('caret position methods was stubbed')
   page.execute_script('app.start();')
@@ -68,8 +51,8 @@ Then /^the input box should be blank$/ do
 end
 
 Then /^the voice should say "([^"]*)"$/ do |arg1|
-  len = page.evaluate_script('voice_debug.length')
-  page.evaluate_script("voice_debug[#{len - 1}]").should eql(arg1)
+  len = page.evaluate_script('app.voice.voice_debug.length')
+  page.evaluate_script("app.voice.voice_debug[#{len - 1}]").should eql(arg1)
 end
 
 Then /^the example loupe should say "([^"]*)"$/ do |arg1|
