@@ -26,6 +26,7 @@ class App extends Spine.Controller
     @timer_controller    = new App.TimerController
 
     @voice               = new App.Voice
+    @help                = new App.Help
 
     Spine.Route.setup()
 
