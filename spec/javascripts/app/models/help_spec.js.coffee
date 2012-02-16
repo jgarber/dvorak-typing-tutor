@@ -97,3 +97,58 @@ describe 'Help', ->
 
         it 'should detect z key', ->
           expect(help.detect_row('z')).toEqual('bottom')
+
+  describe 'hand detection', ->
+    describe 'for lower letters', ->
+      describe 'for left hand', ->
+        it 'should detect 3 key', ->
+          expect(help.detect_hand('3')).toEqual('left')
+
+        it 'should detect . key', ->
+          expect(help.detect_hand('.')).toEqual('left')
+
+        it 'should detect o key', ->
+          expect(help.detect_hand('o')).toEqual('left')
+
+        it 'should detect q key', ->
+          expect(help.detect_hand('q')).toEqual('left')
+
+      describe 'for right hand', ->
+        it 'should detect 7 key', ->
+          expect(help.detect_hand('7')).toEqual('right')
+
+        it 'should detect c key', ->
+          expect(help.detect_hand('c')).toEqual('right')
+
+        it 'should detect t key', ->
+          expect(help.detect_hand('t')).toEqual('right')
+
+        it 'should detect w key', ->
+          expect(help.detect_hand('w')).toEqual('right')
+
+    describe 'for upper letters', ->
+      describe 'for left hand', ->
+        it 'should detect # key', ->
+          expect(help.detect_hand('#')).toEqual('left')
+
+        it 'should detect > key', ->
+          expect(help.detect_hand('>')).toEqual('left')
+
+        it 'should detect O key', ->
+          expect(help.detect_hand('O')).toEqual('left')
+
+        it 'should detect Q key', ->
+          expect(help.detect_hand('Q')).toEqual('left')
+
+      describe 'for right hand', ->
+        it 'should detect & key', ->
+          expect(help.detect_hand('&')).toEqual('right')
+
+        it 'should detect C key', ->
+          expect(help.detect_hand('C')).toEqual('right')
+
+        it 'should detect T key', ->
+          expect(help.detect_hand('T')).toEqual('right')
+
+        it 'should detect W key', ->
+          expect(help.detect_hand('W')).toEqual('right')
