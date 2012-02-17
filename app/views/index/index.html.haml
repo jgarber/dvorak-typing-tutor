@@ -37,14 +37,14 @@
     %p return
 
   -# third row
-  .square.shift
+  .square.shift.left
     %p shift
   - (37..46).each do |num|
     .key.square{ id: "key_#{num}" }
       %p.lower
       %p.upper
 
-  .square.shift
+  .square.shift.right
     %p shift
 
   -# bottom row

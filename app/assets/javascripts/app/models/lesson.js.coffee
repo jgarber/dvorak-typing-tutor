@@ -2,7 +2,7 @@ class App.Lesson extends App.Base
   constructor: (el) ->
     @el = el
     @_current = 0
-    @phrases = ['a', 'o']
+    @phrases = ['A', 'S']
     @split_symbol = '|'
 
     Spine.bind('app:start',  @set_all)
