@@ -63,7 +63,6 @@ class App.Keyboard extends App.Base
 
   highlight_shift: (letter) =>
     hand = window.app.help.detect_hand(letter)
-    console.log hand
     switch hand
       when 'right' then $('.shift.left').addClass('highlighted')
       when 'left'  then $('.shift.right').addClass('highlighted')
