@@ -107,3 +107,24 @@ describe 'Help', ->
 
       it 'should detect h key', ->
         expect(help.detect_finger('h')).toEqual('index')
+
+  describe 'reach detection', ->
+    describe 'for left hand', ->
+      it 'should detect ` key', ->
+        expect(help.detect_reach('`')).toEqual('left')
+
+      it 'should detect a key', ->
+        expect(help.detect_reach('a')).toEqual('no')
+
+      it 'should detect i key', ->
+        expect(help.detect_reach('i')).toEqual('right')
+
+    describe 'for right hand', ->
+      it 'should detect d key', ->
+        expect(help.detect_reach('d')).toEqual('left')
+
+      it 'should detect t key', ->
+        expect(help.detect_reach('t')).toEqual('no')
+
+      it 'should detect - key', ->
+        expect(help.detect_reach('-')).toEqual('right')

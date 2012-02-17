@@ -58,3 +58,18 @@ class App.Help
                           ].indexOf(index) isnt -1
     else
       throw "Undefined FINGER for letter \"#{letter}\" in layout \"#{@layout_title()}\" on position #{index}"
+
+  detect_reach: (letter) ->
+    index = @index_for_any_case(letter)
+
+    if index isnt -1
+      return 'left' if  [
+                            0,             # left  hand
+                            6, 18, 31, 42, # right hand
+                          ].indexOf(index) isnt -1
+      return 'right' if  [
+                            5, 17, 30, 41,         # left  hand
+                            11, 12, 23, 24, 25, 36 # right hand
+                          ].indexOf(index) isnt -1
+
+    return 'no'
