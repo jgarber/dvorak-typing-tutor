@@ -48,13 +48,13 @@ Feature: Learn the first keys
     When I begin the lesson
     And I hesitate
     Then the a key should be highlighted on the virtual keyboard
-    And the voice should say "The a key is on the home row, under your left little finger."
+    And the voice should say "The a key is left hand, home row, little finger, no rich."
     When I type "a"
     And I press return
     And I type "a"
     And I hesitate
     Then the t key should be highlighted on the virtual keyboard
-    And the voice should say "The t key is on the home row, under your right middle finger."
+    And the voice should say "The t key is right hand, home row, middle finger, no rich."
 
   Scenario: Typing a wrong letter
     Given I have begun the lesson

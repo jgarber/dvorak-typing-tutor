@@ -73,3 +73,6 @@ class App.Help
                           ].indexOf(index) isnt -1
 
     return 'no'
+
+  get_help: (letter) =>
+   return "The #{letter} key is #{@detect_hand(letter)} hand, #{@detect_row(letter)} row, #{@detect_finger(letter)} finger, #{@detect_reach(letter)} rich."

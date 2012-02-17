@@ -128,3 +128,11 @@ describe 'Help', ->
 
       it 'should detect - key', ->
         expect(help.detect_reach('-')).toEqual('right')
+
+  describe 'get_help', ->
+    it 'should return hand, finger, reach', ->
+      _s = help.get_help('z')
+      expect(_s).toContain(help.detect_row('z'))
+      expect(_s).toContain(help.detect_hand('z'))
+      expect(_s).toContain(help.detect_finger('z'))
+      expect(_s).toContain(help.detect_reach('z'))

@@ -32,17 +32,17 @@ Feature: Practice typing sentences
     And I type "It is a t"
     And I hesitate
     Then the r key should be highlighted on the virtual keyboard
-    And the voice should say "Right ring finger up."
+    And the voice should say "The r key is right hand, top row, ring finger, no rich."
     When I type "ruth"
     When I press return
     When I type " "
     And I hesitate
     Then the u key should be highlighted on the virtual keyboard
-    And the voice should say "Left index finger."
+    And the voice should say "The u key is left hand, home row, index finger, no rich."
     When I type "universally ac"
     And I hesitate
     Then the k key should be highlighted on the virtual keyboard
-    And the voice should say "Left index finger down."
+    And the voice should say "The k key is left hand, bottom row, index finger, no rich."
 
   Scenario: Misspell a word
     Given I have begun the lesson
