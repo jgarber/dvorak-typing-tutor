@@ -31,8 +31,7 @@ class App extends Spine.Controller
     Spine.Route.setup()
 
   start: =>
-    @lesson_controller.lesson.set_all()
-    @input_controller.input.highlight_next()
+    Spine.trigger('app:start')
 
 
 window.App = App

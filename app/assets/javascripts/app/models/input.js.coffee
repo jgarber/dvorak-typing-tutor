@@ -2,6 +2,8 @@ class App.Input extends App.Base
   constructor: (el) ->
     @el = el
 
+    Spine.bind('app:start',  @highlight_next)
+
     Spine.bind('input_box:shift_pressed',  @shift_pressed)
     Spine.bind('input_box:shift_released', @shift_released)
     Spine.bind('input_box:return_pressed', @return_pressed)

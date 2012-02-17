@@ -5,6 +5,7 @@ class App.Keyboard extends App.Base
     @current_layout = null
     @el             = el
 
+    Spine.bind('app:start',  @colorize_keys)
     Spine.bind('app:finish', @clear_highlighting)
 
   get_layout: (layout, _case) =>
@@ -62,3 +63,20 @@ class App.Keyboard extends App.Base
 
   highlight_return: =>
     @highlight_next('return')
+
+  colorize_keys: =>
+    alpha = 0.5
+
+    for i in [0..(@count - 1)]
+      key = $("#key_#{i}")
+      if key
+        letter = @get_array(@current_layout)[i]
+        finger = window.app.help.detect_finger(letter)
+        switch finger
+          when 'middle' then color = "rgba(0, 255, 0, #{alpha})"
+          when 'index'  then color = "rgba(255, 0, 0, #{alpha})"
+          when 'ring'   then color = "rgba(0, 0, 255, #{alpha})"
+          when 'little' then color = "rgba(0, 125, 125, #{alpha})"
+          else               color = "rgba(0, 0, 0, #{alpha})"
+
+        key.css('background-color', color)

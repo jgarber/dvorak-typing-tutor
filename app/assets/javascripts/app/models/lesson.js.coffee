@@ -5,6 +5,7 @@ class App.Lesson extends App.Base
     @phrases = ['a', 'o']
     @split_symbol = '|'
 
+    Spine.bind('app:start',  @set_all)
     Spine.bind('app:finish', @finish)
 
   set_lesson: (lesson) =>
