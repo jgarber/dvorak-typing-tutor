@@ -6,207 +6,104 @@ describe 'Help', ->
   it 'should return current layout', ->
     expect(help.layout()).toEqual(app.keyboard_controller.keyboard.get_current_layout())
 
-  it 'should return a key index', ->
-    expect(help.index('a')).toEqual(26)
-
-  it 'should return o key index', ->
-    expect(help.index('o')).toEqual(27)
-
-  it 'should return z key index', ->
-    expect(help.index('z')).toEqual(46)
+  it 'index should be equal for lower and upper letters', ->
+    expect(help.index_for_any_case('z')).toEqual(46)
+    expect(help.index_for_any_case('Z')).toEqual(46)
 
   describe 'row detection', ->
-    describe 'for lower letters', ->
-      describe 'in number row', ->
-        it 'should detect ` key', ->
-          expect(help.detect_row('`')).toEqual('number')
+    describe 'in number row', ->
+      it 'should detect ` key', ->
+        expect(help.detect_row('`')).toEqual('number')
 
-        it 'should detect 3 key', ->
-          expect(help.detect_row('3')).toEqual('number')
+      it 'should detect 3 key', ->
+        expect(help.detect_row('3')).toEqual('number')
 
-        it 'should detect ] key', ->
-          expect(help.detect_row(']')).toEqual('number')
+      it 'should detect ] key', ->
+        expect(help.detect_row(']')).toEqual('number')
 
-      describe 'in top row', ->
-        it 'should detect \' key', ->
-          expect(help.detect_row('\'')).toEqual('top')
+    describe 'in top row', ->
+      it 'should detect \' key', ->
+        expect(help.detect_row('\'')).toEqual('top')
 
-        it 'should detect y key', ->
-          expect(help.detect_row('y')).toEqual('top')
+      it 'should detect y key', ->
+        expect(help.detect_row('y')).toEqual('top')
 
-        it 'should detect \\ key', ->
-          expect(help.detect_row('\\')).toEqual('top')
+      it 'should detect \\ key', ->
+        expect(help.detect_row('\\')).toEqual('top')
 
-      describe 'in home row', ->
-        it 'should detect a key', ->
-          expect(help.detect_row('a')).toEqual('home')
+    describe 'in home row', ->
+      it 'should detect a key', ->
+        expect(help.detect_row('a')).toEqual('home')
 
-        it 'should detect o key', ->
-          expect(help.detect_row('o')).toEqual('home')
+      it 'should detect o key', ->
+        expect(help.detect_row('o')).toEqual('home')
 
-        it 'should detect - key', ->
-          expect(help.detect_row('-')).toEqual('home')
+      it 'should detect - key', ->
+        expect(help.detect_row('-')).toEqual('home')
 
-      describe 'in bottom row', ->
-        it 'should detect ; key', ->
-          expect(help.detect_row(';')).toEqual('bottom')
+    describe 'in bottom row', ->
+      it 'should detect ; key', ->
+        expect(help.detect_row(';')).toEqual('bottom')
 
-        it 'should detect x key', ->
-          expect(help.detect_row('x')).toEqual('bottom')
+      it 'should detect x key', ->
+        expect(help.detect_row('x')).toEqual('bottom')
 
-        it 'should detect z key', ->
-          expect(help.detect_row('z')).toEqual('bottom')
-
-    describe 'for upper letters', ->
-      describe 'in number row', ->
-        it 'should detect ~ key', ->
-          expect(help.detect_row('~')).toEqual('number')
-
-        it 'should detect # key', ->
-          expect(help.detect_row('#')).toEqual('number')
-
-        it 'should detect } key', ->
-          expect(help.detect_row('}')).toEqual('number')
-
-      describe 'in top row', ->
-        it 'should detect " key', ->
-          expect(help.detect_row('"')).toEqual('top')
-
-        it 'should detect y key', ->
-          expect(help.detect_row('y')).toEqual('top')
-
-        it 'should detect | key', ->
-          expect(help.detect_row('|')).toEqual('top')
-
-      describe 'in home row', ->
-        it 'should detect a key', ->
-          expect(help.detect_row('a')).toEqual('home')
-
-        it 'should detect o key', ->
-          expect(help.detect_row('o')).toEqual('home')
-
-        it 'should detect _ key', ->
-          expect(help.detect_row('_')).toEqual('home')
-
-      describe 'in bottom row', ->
-        it 'should detect : key', ->
-          expect(help.detect_row(':')).toEqual('bottom')
-
-        it 'should detect x key', ->
-          expect(help.detect_row('x')).toEqual('bottom')
-
-        it 'should detect z key', ->
-          expect(help.detect_row('z')).toEqual('bottom')
+      it 'should detect z key', ->
+        expect(help.detect_row('z')).toEqual('bottom')
 
   describe 'hand detection', ->
-    describe 'for lower letters', ->
-      describe 'for left hand', ->
-        it 'should detect 3 key', ->
-          expect(help.detect_hand('3')).toEqual('left')
+    describe 'for left hand', ->
+      it 'should detect 3 key', ->
+        expect(help.detect_hand('3')).toEqual('left')
 
-        it 'should detect . key', ->
-          expect(help.detect_hand('.')).toEqual('left')
+      it 'should detect . key', ->
+        expect(help.detect_hand('.')).toEqual('left')
 
-        it 'should detect o key', ->
-          expect(help.detect_hand('o')).toEqual('left')
+      it 'should detect o key', ->
+        expect(help.detect_hand('o')).toEqual('left')
 
-        it 'should detect q key', ->
-          expect(help.detect_hand('q')).toEqual('left')
+      it 'should detect q key', ->
+        expect(help.detect_hand('q')).toEqual('left')
 
-      describe 'for right hand', ->
-        it 'should detect 7 key', ->
-          expect(help.detect_hand('7')).toEqual('right')
+    describe 'for right hand', ->
+      it 'should detect 7 key', ->
+        expect(help.detect_hand('7')).toEqual('right')
 
-        it 'should detect c key', ->
-          expect(help.detect_hand('c')).toEqual('right')
+      it 'should detect c key', ->
+        expect(help.detect_hand('c')).toEqual('right')
 
-        it 'should detect t key', ->
-          expect(help.detect_hand('t')).toEqual('right')
+      it 'should detect t key', ->
+        expect(help.detect_hand('t')).toEqual('right')
 
-        it 'should detect w key', ->
-          expect(help.detect_hand('w')).toEqual('right')
-
-    describe 'for upper letters', ->
-      describe 'for left hand', ->
-        it 'should detect # key', ->
-          expect(help.detect_hand('#')).toEqual('left')
-
-        it 'should detect > key', ->
-          expect(help.detect_hand('>')).toEqual('left')
-
-        it 'should detect O key', ->
-          expect(help.detect_hand('O')).toEqual('left')
-
-        it 'should detect Q key', ->
-          expect(help.detect_hand('Q')).toEqual('left')
-
-      describe 'for right hand', ->
-        it 'should detect & key', ->
-          expect(help.detect_hand('&')).toEqual('right')
-
-        it 'should detect C key', ->
-          expect(help.detect_hand('C')).toEqual('right')
-
-        it 'should detect T key', ->
-          expect(help.detect_hand('T')).toEqual('right')
-
-        it 'should detect W key', ->
-          expect(help.detect_hand('W')).toEqual('right')
+      it 'should detect w key', ->
+        expect(help.detect_hand('w')).toEqual('right')
 
   describe 'finder detection', ->
-    describe 'for lower leters', ->
-      it 'should return thumb for space key', ->
-        expect(help.detect_finger(' ')).toEqual('thumb')
+    it 'should return thumb for space key', ->
+      expect(help.detect_finger(' ')).toEqual('thumb')
 
-      describe 'for left hand', ->
-        it 'should detect a key', ->
-          expect(help.detect_finger('a')).toEqual('little')
+    describe 'for left hand', ->
+      it 'should detect a key', ->
+        expect(help.detect_finger('a')).toEqual('little')
 
-        it 'should detect o key', ->
-          expect(help.detect_finger('o')).toEqual('ring')
+      it 'should detect o key', ->
+        expect(help.detect_finger('o')).toEqual('ring')
 
-        it 'should detect e key', ->
-          expect(help.detect_finger('e')).toEqual('middle')
+      it 'should detect e key', ->
+        expect(help.detect_finger('e')).toEqual('middle')
 
-        it 'should detect u key', ->
-          expect(help.detect_finger('u')).toEqual('index')
+      it 'should detect u key', ->
+        expect(help.detect_finger('u')).toEqual('index')
 
-      describe 'for right hand', ->
-        it 'should detect s key', ->
-          expect(help.detect_finger('s')).toEqual('little')
+    describe 'for right hand', ->
+      it 'should detect s key', ->
+        expect(help.detect_finger('s')).toEqual('little')
 
-        it 'should detect n key', ->
-          expect(help.detect_finger('n')).toEqual('ring')
+      it 'should detect n key', ->
+        expect(help.detect_finger('n')).toEqual('ring')
 
-        it 'should detect t key', ->
-          expect(help.detect_finger('t')).toEqual('middle')
+      it 'should detect t key', ->
+        expect(help.detect_finger('t')).toEqual('middle')
 
-        it 'should detect h key', ->
-          expect(help.detect_finger('h')).toEqual('index')
-
-    describe 'for upper leters', ->
-      describe 'for left hand', ->
-        it 'should detect A key', ->
-          expect(help.detect_finger('A')).toEqual('little')
-
-        it 'should detect O key', ->
-          expect(help.detect_finger('O')).toEqual('ring')
-
-        it 'should detect E key', ->
-          expect(help.detect_finger('E')).toEqual('middle')
-
-        it 'should detect U key', ->
-          expect(help.detect_finger('U')).toEqual('index')
-
-      describe 'for right hand', ->
-        it 'should detect S key', ->
-          expect(help.detect_finger('S')).toEqual('little')
-
-        it 'should detect N key', ->
-          expect(help.detect_finger('N')).toEqual('ring')
-
-        it 'should detect T key', ->
-          expect(help.detect_finger('T')).toEqual('middle')
-
-        it 'should detect H key', ->
-          expect(help.detect_finger('H')).toEqual('index')
+      it 'should detect h key', ->
+        expect(help.detect_finger('h')).toEqual('index')
