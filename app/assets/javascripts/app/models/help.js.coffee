@@ -8,9 +8,14 @@ class App.Help
   index: (letter, _case = 'lowercase') ->
     @layout(_case).indexOf(letter)
 
-  detect_row: (letter) ->
+  index_for_any_case: (letter) ->
     index = @index(letter)
     index = @index(letter, 'uppercase') if index is -1
+
+    index
+
+  detect_row: (letter) ->
+    index = @index_for_any_case(letter)
 
     if index isnt -1
       return 'number' if index >= 0  and index <= 12
@@ -21,8 +26,7 @@ class App.Help
       throw "Undefined ROW for letter \"#{letter}\" in layout \"#{@layout_title()}\" on position #{index}"
 
   detect_hand: (letter) ->
-    index = @index(letter)
-    index = @index(letter, 'uppercase') if index is -1
+    index = @index_for_any_case(letter)
 
     if index isnt -1
       return 'left'  if (index >= 0  and index <= 5 ) or (index >= 13 and index <= 17) or (index >= 26 and index <= 30) or (index >= 37 and index <= 41)
