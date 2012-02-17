@@ -65,18 +65,31 @@ class App.Keyboard extends App.Base
     @highlight_next('return')
 
   colorize_keys: =>
-    alpha = 0.5
-
     for i in [0..(@count - 1)]
       key = $("#key_#{i}")
       if key
-        letter = @get_array(@current_layout)[i]
-        finger = window.app.help.detect_finger(letter)
-        switch finger
-          when 'middle' then color = "rgba(0, 255, 0, #{alpha})"
-          when 'index'  then color = "rgba(255, 0, 0, #{alpha})"
-          when 'ring'   then color = "rgba(0, 0, 255, #{alpha})"
-          when 'little' then color = "rgba(0, 125, 125, #{alpha})"
-          else               color = "rgba(0, 0, 0, #{alpha})"
-
+        color = @get_key_color(i)
         key.css('background-color', color)
+
+  get_key_color: (index) =>
+    alpha  = 1
+    letter = @get_array(@current_layout)[index]
+    finger = window.app.help.detect_finger(letter)
+    hand   = window.app.help.detect_hand(letter)
+    color  = "rgba(0, 0, 0, #{alpha})"
+
+    if hand == 'left'
+      switch finger
+        when 'little' then color = "rgba(90, 93, 165, #{alpha})"
+        when 'ring'   then color = "rgba(184, 97, 138, #{alpha})"
+        when 'middle' then color = "rgba(192, 186, 84, #{alpha})"
+        when 'index'  then color = "rgba(99, 191, 145, #{alpha})"
+
+    if hand == 'right'
+      switch finger
+        when 'index'  then color = "rgba(90, 137, 80, #{alpha})"
+        when 'middle' then color = "rgba(198, 157, 57, #{alpha})"
+        when 'ring'   then color = "rgba(186, 95, 95, #{alpha})"
+        when 'little' then color = "rgba(84, 155, 192, #{alpha})"
+
+    color
