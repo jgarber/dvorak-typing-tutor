@@ -183,3 +183,30 @@ describe 'Help', ->
 
         it 'should detect h key', ->
           expect(help.detect_finger('h')).toEqual('index')
+
+    describe 'for upper leters', ->
+      describe 'for left hand', ->
+        it 'should detect A key', ->
+          expect(help.detect_finger('A')).toEqual('little')
+
+        it 'should detect O key', ->
+          expect(help.detect_finger('O')).toEqual('ring')
+
+        it 'should detect E key', ->
+          expect(help.detect_finger('E')).toEqual('middle')
+
+        it 'should detect U key', ->
+          expect(help.detect_finger('U')).toEqual('index')
+
+      describe 'for right hand', ->
+        it 'should detect S key', ->
+          expect(help.detect_finger('S')).toEqual('little')
+
+        it 'should detect N key', ->
+          expect(help.detect_finger('N')).toEqual('ring')
+
+        it 'should detect T key', ->
+          expect(help.detect_finger('T')).toEqual('middle')
+
+        it 'should detect H key', ->
+          expect(help.detect_finger('H')).toEqual('index')
