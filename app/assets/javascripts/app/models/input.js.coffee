@@ -7,6 +7,8 @@ class App.Input extends App.Base
   		resize_enabled: false
   		customConfig: ''
   		language: 'en'
+  		width: '600px'
+  		height: '200px'
 
     Spine.bind('app:start',  @highlight_next)
     Spine.bind('app:start',  @initialize_wysiwyg)

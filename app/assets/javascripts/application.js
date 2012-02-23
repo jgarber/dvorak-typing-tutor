@@ -7,7 +7,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_outerhtml
-//= require ckeditor
-//= require ckeditor/adapters/jquery
+//= require ckeditor-jquery
 //= require app/app
 //= require_tree .
