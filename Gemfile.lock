@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/jgarber/rails-ckeditor.git
-  revision: e8803022d55bee7228a0a61275f8cb524a43d5c6
-  specs:
-    ckeditor-rails (0.0.3)
-      rails (>= 3.1.3)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -52,6 +45,9 @@ GEM
       json
     childprocess (0.2.9)
       ffi (~> 1.0.6)
+    ckeditor_rails (3.6.2)
+      railties (~> 3.0)
+      thor (~> 0.14)
     coffee-rails (3.2.1)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0.beta)
@@ -189,7 +185,7 @@ PLATFORMS
 DEPENDENCIES
   capybara-firebug
   capybara-webkit
-  ckeditor-rails!
+  ckeditor_rails
   coffee-rails (~> 3.2.1)
   cucumber-rails
   database_cleaner

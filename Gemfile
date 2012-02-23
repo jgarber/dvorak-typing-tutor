@@ -6,7 +6,8 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'json'
 gem 'sqlite3'
-gem 'ckeditor-rails', :git => 'git://github.com/jgarber/rails-ckeditor.git'
+# gem 'ckeditor-rails', :git => 'git://github.com/jgarber/rails-ckeditor.git'
+gem 'ckeditor_rails', :require => 'ckeditor-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
