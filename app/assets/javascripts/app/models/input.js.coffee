@@ -1,25 +1,23 @@
 class App.Input extends App.Base
   constructor: (el) ->
     @el = el
-    @editor_config =
+    editor_config =
   		toolbar: [['Bold', 'Italic']]
   		removePlugins: 'elementspath' 
   		resize_enabled: false
   		customConfig: ''
+  		toolbarStartupExpanded: false
   		language: 'en'
   		width: '600px'
   		height: '200px'
+    $(@el).ckeditor(editor_config)
 
     Spine.bind('app:start',  @highlight_next)
-    Spine.bind('app:start',  @initialize_wysiwyg)
 
     Spine.bind('input_box:shift_pressed',  @shift_pressed)
     Spine.bind('input_box:shift_released', @shift_released)
     Spine.bind('input_box:return_pressed', @return_pressed)
     Spine.bind('input_box:changed',        @changed)
-
-  initialize_wysiwyg: =>
-    $(@el).ckeditor(@editor_config)
 
   save_position: =>
     @saved_position = rangy.saveSelection()
