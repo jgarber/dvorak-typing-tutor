@@ -5,6 +5,8 @@
 // the compiled file.
 //
 //= require jquery
+//= require ckeditor/init
+//= require ckeditor/adapters/jquery
 //= require jquery_ujs
 //= require jquery_outerhtml
 //= require app/app
