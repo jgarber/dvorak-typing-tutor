@@ -1,6 +1,8 @@
 class App.Input extends App.Base
   constructor: (el) ->
 
+    Spine.bind('app:finish', @finish)
+
     Spine.bind('editor:ready',  @ready)
 
     Spine.bind('input_box:shift_pressed',  @shift_pressed)
@@ -11,6 +13,9 @@ class App.Input extends App.Base
   ready: =>
     @editor = CKEDITOR.instances.input_box
     @highlight_next()
+
+  finish: =>
+    @editor.setReadOnly(true)
 
   clear: =>
     @editor.setData('')
