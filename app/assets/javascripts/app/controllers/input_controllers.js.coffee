@@ -17,6 +17,7 @@ class App.InputController extends Spine.Controller
 
   ready: ->
     Spine.trigger('editor:ready')
+
     CKEDITOR.instances.input_box.on('change', ->
       Spine.trigger('input_box:changed')
     )
