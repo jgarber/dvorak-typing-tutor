@@ -1,6 +1,7 @@
 class App.Input extends App.Base
   constructor: (el) ->
     @el = el
+    @editor = CKEDITOR.instances.input_box
 
     Spine.bind('app:start',  @highlight_next)
 
