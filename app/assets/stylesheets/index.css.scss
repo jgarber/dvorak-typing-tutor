@@ -2,7 +2,7 @@ div {
   border-radius: 5px;
 }
 
-.lesson_box, .input_box, .cke_editor_input_box, .keyboard {
+.lesson_box, .input_box, .keyboard {
   margin: 0 auto;
 }
 
@@ -54,9 +54,12 @@ div {
   display: none;
 }
 
-#input_box, #cke_input_box {
+.input_box {
   width: 600px;
   height: 100px;
+  border: 2px solid grey;
+  padding: 50px;
+  font-weight: bold;
 
   .error {
     color: red;
