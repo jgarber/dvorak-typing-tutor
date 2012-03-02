@@ -2,12 +2,6 @@ div {
   border-radius: 5px;
 }
 
-#wrap {
-  width: 800px;
-  margin: 0 auto;
-  position: relative;
-}
-
 .lesson_box, .input_box, .cke_editor_input_box, .keyboard {
   margin: 0 auto;
 }
@@ -39,10 +33,10 @@ div {
 }
 
 .timer {
-  position: absolute;
+  position: relative;
   margin: 0 auto;
-  top: 40px;
-  right: 40px;
+  top: -200px;
+  left: 305px;
   width: 70px;
   border: 2px solid grey;
   padding: 10px;
@@ -61,6 +55,8 @@ div {
 }
 
 #input_box, #cke_input_box {
+  width: 600px;
+  height: 100px;
 
   .error {
     color: red;
