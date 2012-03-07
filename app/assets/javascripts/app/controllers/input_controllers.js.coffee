@@ -6,13 +6,17 @@ class App.InputController extends Spine.Controller
     @tmp_html = @el.html()
     @input = new App.Input(@el)
     @el.ckeditor(@ready,
-      extraPlugins: 'onchange',
-      minimumChangeMilliseconds: 100,
-      width: 600,
-      height: 100,
-      tabIndex: 0,
-      toolbarStartupExpanded: false,
-      toolbar: 'Basic'
+      extraPlugins: 'onchange'
+      minimumChangeMilliseconds: 100
+      width: 640
+      height: 140
+      tabIndex: 0
+      toolbarStartupExpanded: false
+      toolbar: [['Bold', 'Italic']]
+      removePlugins: 'elementspath'
+      resize_enabled: false
+      customConfig: ''
+      language: 'en'
     )
 
   ready: ->
