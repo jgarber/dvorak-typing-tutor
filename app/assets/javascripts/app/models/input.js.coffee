@@ -75,7 +75,7 @@ class App.Input extends App.Base
    str = tmp.textContent or tmp.innerText
 
    if str
-     str.replace(/^\s+|\s+$/g, '') # trim str
+     str = str.replace(/\n|\t/g, '') # trim str
    else
      ''
 
