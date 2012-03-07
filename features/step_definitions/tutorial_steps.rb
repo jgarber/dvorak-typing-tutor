@@ -131,3 +131,7 @@ Then /^I should see my words per minute$/ do
   page.execute_script("app.timer_controller.timer.finish()")
   page.evaluate_script('$("#words_per_minute").html()').should match(/17/)
 end
+
+And /debug/ do
+  sleep(999)
+end
