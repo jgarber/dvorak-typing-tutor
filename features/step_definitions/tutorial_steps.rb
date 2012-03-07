@@ -62,14 +62,11 @@ Then /^the timer should be running$/ do
 end
 
 Then /^the input box should contain "([^"]*)"$/ do |arg1|
-  html_content.should eql(arg1)
+  get_input_content.should eql(arg1)
 end
 
 When /^I press return$/ do
-  page.execute_script(<<-EOS
-    Spine.trigger('input_box:return_pressed');
-  EOS
-  )
+  page.execute_script('Spine.trigger("input_box:return_pressed");')
 end
 
 When /^I hesitate$/ do
