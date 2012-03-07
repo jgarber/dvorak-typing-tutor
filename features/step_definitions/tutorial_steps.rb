@@ -33,7 +33,7 @@ Then /^the timer should not be running$/ do
 end
 
 Then /^the input box should be blank$/ do
-  page.evaluate_script('app.input_controller.input.stripped_content()').should == ''
+  get_input_content.should == ''
 end
 
 Then /^the voice should say "([^"]*)"$/ do |arg1|
@@ -50,11 +50,7 @@ Given /^I have begun the lesson$/ do
 end
 
 When /^I type "([^"]*)"$/ do |arg1|
-  page.execute_script(<<-EOS
-    $('#input_box').append('#{arg1}');
-    Spine.trigger('input_box:changed');
-  EOS
-  )
+  append_input_content(arg1)
 end
 
 Then /^the timer should be running$/ do
@@ -94,12 +90,8 @@ Then /^the "([^"]*)" in the input box should be underlined$/ do |arg1|
 end
 
 When /^I backspace$/ do
-  html = html_content
-  page.execute_script(<<-EOS
-    $('#input_box').html('#{html[0..-2]}');
-    Spine.trigger('input_box:changed');
-  EOS
-  )
+  html = get_input_content
+  set_input_content("#{html[0..-2]}");
 end
 
 Then /^nothing in the input box should be underlined$/ do

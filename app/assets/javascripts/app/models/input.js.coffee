@@ -17,9 +17,18 @@ class App.Input extends App.Base
   finish: =>
     @editor.setReadOnly(true)
 
-  clear: =>
-    @editor.setData('')
+  append_content: (content) =>
+    @set_content(@get_content() + content)
+
+  set_content: (content = '') =>
+    @editor.setData(content)
     @editor.focus()
+
+  get_content: =>
+    @editor.getData()
+
+  clear: =>
+    @set_content()
 
   shift_pressed: =>
     app.keyboard_controller.keyboard.upcase()
