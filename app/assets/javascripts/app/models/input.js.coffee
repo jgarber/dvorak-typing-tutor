@@ -1,20 +1,34 @@
 class App.Input extends App.Base
   constructor: (el) ->
-    @el = el
 
-    Spine.bind('app:start',  @highlight_next)
+    Spine.bind('app:finish', @finish)
+
+    Spine.bind('editor:ready',  @ready)
 
     Spine.bind('input_box:shift_pressed',  @shift_pressed)
     Spine.bind('input_box:shift_released', @shift_released)
     Spine.bind('input_box:return_pressed', @return_pressed)
     Spine.bind('input_box:changed',        @changed)
 
-  save_position: =>
-    @saved_position = rangy.saveSelection()
+  ready: =>
+    @editor = CKEDITOR.instances.input_box
+    @highlight_next()
 
-  restore_position: =>
-    rangy.restoreSelection(@saved_position)
+  finish: =>
+    @editor.setReadOnly(true)
 
+  append_content: (content) =>
+    @set_content(@get_content() + content)
+
+  set_content: (content = '') =>
+    @editor.setData(content)
+    @editor.focus()
+
+  get_content: =>
+    @editor.getData()
+
+  clear: =>
+    @set_content()
 
   shift_pressed: =>
     app.keyboard_controller.keyboard.upcase()
@@ -24,7 +38,7 @@ class App.Input extends App.Base
 
   return_pressed: =>
     if app.lesson_controller.lesson.current() == @stripped_content()
-      @el.html('')
+      @clear()
       app.lesson_controller.lesson.go_next()
       @highlight_next()
 
@@ -67,62 +81,19 @@ class App.Input extends App.Base
   strip: (html) ->
    tmp = document.createElement("DIV")
    tmp.innerHTML = html
-   tmp.textContent || tmp.innerText
+   str = tmp.textContent or tmp.innerText
+
+   if str
+     str = str.replace(/\n|\t/g, '') # trim str
+   else
+     ''
 
   stripped_content: =>
-    out = @strip(@el.html())
-    return out.replace(@strip('&#65279;'), '') if out # clear from rangy meta characters
-    return out
+    @strip(@editor.getData() or '')
 
   errors: =>
-    current = app.lesson_controller.lesson.current().split(' ')
-    input = @stripped_content().split(' ')
-
-    out = {
-      words: []
-      present: false
-    }
-
-    for i in [0..(input.length - 1)]
-      regexp = new RegExp("^#{input[i]}", 'i')
-      if input[i].length > 0
-        unless regexp.test(current[i])
-          out.words.push([-1, input[i]])
-          out.present = true
-        else
-          out.words.push([0, input[i]])
-
-    out
+    # do nothing here for now
+    []
 
   highlight_typos: (errors) =>
-    @save_position() # creates hidden element in div
-    html = @stripped_content()
-
-    # get caret mark element
-    mark_el = @$('.rangySelectionBoundary')
-
-    if mark_el
-      mark_el = mark_el.outerHTML()
-      # get caret mark position
-      mark = @strip(@el.html()).match(@strip('&#65279;'))
-      # insper caret mark on previous position
-      html = "#{html.substr(0, mark.index)}#{mark_el}#{html.substr(mark.index)}" if mark
-
-    for word in errors.words
-      # highlight typo
-      if word[0] == -1
-        # FIXME still can repsace some data in html tags, or wrong word
-        regexp = new RegExp("#{word[1]}", 'i')
-        # replace typo with typo wrapped in span.error
-        html = html.replace(regexp, "<span class='error'>#{word[1]}</span>")
-
-    # swap html in div
-    @el.html(@hacks_for_browsers(html))
-    # restore caret position
-    @restore_position()
-
-  hacks_for_browsers: (html) ->
-    if navigator.userAgent.match('Mozilla')
-      html += '<br _moz_dirty="">'
-
-    html
+    # do nothing here for now

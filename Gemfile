@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'json'
 gem 'sqlite3'
+gem 'ckeditor', '3.7.0.rc3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
