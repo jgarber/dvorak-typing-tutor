@@ -1,6 +1,7 @@
 class App.Voice
   constructor: ->
     @voice_debug = []
+    @beep_debug  = false
 
   say: (string) =>
     @voice_debug.push(string)
@@ -12,6 +13,7 @@ class App.Voice
       @say(string)
 
   beep: ->
+    @beep_debug = true
     if console && console.log
       console.log('beep')
 

@@ -23,21 +23,7 @@ When /^caret position methods was stubbed$/ do
   )
 end
 
-When /^beep method was stubbed$/ do
-  page.execute_script(<<-EOS
-    beep_debug = false;
-
-    $(function() {
-      app.voice.beep = function() {
-        beep_debug = true;
-      }
-    });
-  EOS
-  )
-end
-
 When /^I begin the lesson$/ do
-  step('beep method was stubbed')
   step('caret position methods was stubbed')
   page.execute_script('app.start();')
 end
