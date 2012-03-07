@@ -10,5 +10,12 @@
 //= require ckeditor/plugins/onchange
 //= require jquery_ujs
 //= require jquery_outerhtml
+//= require json2
+//
+//= require spine
+//= require spine/manager
+//= require spine/ajax
+//= require spine/route
+//
 //= require app/app
 //= require_tree .
