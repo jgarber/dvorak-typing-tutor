@@ -15,6 +15,8 @@ class App.Help
     index
 
   detect_row: (letter) ->
+    return 'bottom' if letter is ' '
+
     index = @index_for_any_case(letter)
 
     if index isnt -1
@@ -26,6 +28,8 @@ class App.Help
       throw "Undefined ROW for letter \"#{letter}\" in layout \"#{@layout_title()}\" on position #{index}"
 
   detect_hand: (letter) ->
+    return 'any' if letter is ' '
+
     index = @index_for_any_case(letter)
 
     if index isnt -1
@@ -60,6 +64,8 @@ class App.Help
       throw "Undefined FINGER for letter \"#{letter}\" in layout \"#{@layout_title()}\" on position #{index}"
 
   detect_reach: (letter) ->
+    return 'no' if letter is ' '
+
     index = @index_for_any_case(letter)
 
     if index isnt -1
