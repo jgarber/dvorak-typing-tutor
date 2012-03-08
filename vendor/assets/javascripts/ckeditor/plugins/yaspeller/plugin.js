@@ -378,7 +378,7 @@ THE SOFTWARE.
     var range = this.getSelection().getRanges()[0];
     range.shrink(CKEDITOR.SHRINK_TEXT);
     var send_text = '';
-    cinstane = this.name;
+    cinstance = this.name;
     var text = this.document.getBody().getHtml().replace('<br/>', ' ').replace('<br>', ' ');
     var splitted_text = uniqueArray(splitText(removeHTMLTags(text)));
     for (word in yaspeller_errors[cinstance]) {
