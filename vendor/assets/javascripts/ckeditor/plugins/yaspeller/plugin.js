@@ -66,12 +66,8 @@ THE SOFTWARE.
         if (typeof yaspeller_corrs === "undefined") {
           yaspeller_corrs = {};
         }
-        if (typeof yaspeller_sarr === "undefined") {
-          yaspeller_sarr = {};
-        }
         yaspeller_errors[editor.name] = {};
         yaspeller_corrs[editor.name] = {};
-        yaspeller_sarr[editor.name] = [];
         checkSpellInit(body, editor.name);
       });
       
@@ -153,11 +149,6 @@ THE SOFTWARE.
       temp_err = [];
       for (i = 0; i < text.length; i++) {
         temp_err.push(text[i].word);
-      }
-      for (i = 0; i < yaspeller_sarr[cinstance].length; i++) {
-        if (!inArray(temp_err, yaspeller_sarr[cinstance][i])) {
-          yaspeller_corrs[cinstance][yaspeller_sarr[cinstance][i]] = 1;
-        }
       }
       for (i = 0; i < text.length; i++) {
         yaspeller_errors[cinstance][text[i].word] = text[i];
@@ -395,17 +386,9 @@ THE SOFTWARE.
         delete yaspeller_errors[cinstance][word];
       }
     }
-    for (word in yaspeller_corrs[cinstance]) {
-      if (!inArray(splitted_text, word)) {
-        delete yaspeller_corrs[cinstance][word];
-      }
-    }
     if (splitted_text.length > 0) {
       for (i = 0; i < splitted_text.length; i++) {
-        if (!yaspeller_errors[cinstance][splitted_text[i]] && !yaspeller_corrs[cinstance][splitted_text[i]]) {
-          yaspeller_sarr[cinstance].push(splitted_text[i]);
-          send_text += splitted_text[i] + ' ';
-        }
+        send_text += splitted_text[i] + ' ';
       }
       focusafter = true;
       checkWord(send_text, getCharset());
@@ -425,18 +408,10 @@ THE SOFTWARE.
             delete yaspeller_errors[cinstance][word];
           }
         }
-        for (word in yaspeller_corrs[cinstance]) {
-          if (!inArray(splitted_text, word)) {
-            delete yaspeller_corrs[cinstance][word];
-          }
-        }
         if (splitted_text.length > 0) {
           var i;
           for (i = 0; i < splitted_text.length; i++) {
-            if (!yaspeller_errors[cinstance][splitted_text[i]] && !yaspeller_corrs[cinstance][splitted_text[i]]) {
-              yaspeller_sarr[cinstance].push(splitted_text[i]);
-              send_text += splitted_text[i] + ' ';
-            }
+            send_text += splitted_text[i] + ' ';
           }
           focusafter = false;
           checkWord(send_text, getCharset());
