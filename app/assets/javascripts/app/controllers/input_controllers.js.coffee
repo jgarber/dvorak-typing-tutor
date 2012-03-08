@@ -6,14 +6,14 @@ class App.InputController extends Spine.Controller
     @tmp_html = @el.html()
     @input = new App.Input(@el)
     @el.ckeditor(@ready,
-      extraPlugins: 'onchange'
+      extraPlugins: 'onchange,yaspeller'
       minimumChangeMilliseconds: 100
       width: 640
       height: 140
       tabIndex: 0
       toolbarStartupExpanded: false
       toolbar: [['Bold', 'Italic']]
-      removePlugins: 'elementspath'
+      removePlugins: 'elementspath,scayt'
       resize_enabled: false
       customConfig: ''
       language: 'en'
