@@ -63,11 +63,7 @@ THE SOFTWARE.
         if (typeof yaspeller_errors === "undefined") {
           yaspeller_errors = {};
         }
-        if (typeof yaspeller_corrs === "undefined") {
-          yaspeller_corrs = {};
-        }
         yaspeller_errors[editor.name] = {};
-        yaspeller_corrs[editor.name] = {};
         checkSpellInit(body, editor.name);
       });
       
