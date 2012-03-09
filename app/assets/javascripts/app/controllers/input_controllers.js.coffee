@@ -17,6 +17,7 @@ class App.InputController extends Spine.Controller
       resize_enabled: false
       customConfig: ''
       language: 'en'
+      startupFocus: true
     )
 
   ready: ->
