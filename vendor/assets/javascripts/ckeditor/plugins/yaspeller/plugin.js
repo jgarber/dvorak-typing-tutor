@@ -173,10 +173,15 @@ THE SOFTWARE.
       }
       var current_text = CKEDITOR.instances[cinstance].getData();
       for (word in yaspeller_errors[cinstance]){
-        current_text = current_text.replace(
-        new RegExp('\\b' + word + '\\b', 'g'),
-          '<span class="yaspeller_error" data-spell-word="'+word+'">'+word+'</span>'
-        );
+        var length = word.length;
+        var translated_position = current_text.indexOf(word);
+        current_text = current_text.substr(0,translated_position) + 
+          '<span class="yaspeller_error" data-spell-word="'+word+'">'+word+'</span>' + 
+          current_text.substr(translated_position + length);
+        // current_text = current_text.replace(
+        // new RegExp('\\b' + word + '\\b', 'g'),
+        //   '<span class="yaspeller_error" data-spell-word="'+word+'">'+word+'</span>'
+        // );
       }
       CKEDITOR.instances[cinstance].document.getBody().setHtml(current_text);
       if (focusafter) {
@@ -187,7 +192,6 @@ THE SOFTWARE.
       cinstance = '';
     }
   };
-
 
   var checkSpellTimer = null;
 
@@ -291,10 +295,11 @@ THE SOFTWARE.
       cinstance = this.name;
       var range = this.getSelection().getRanges()[0];
       var parent = range.startContainer.getParent();
-      if (checkSpellTimer) {
-        clearTimeout(checkSpellTimer);
-      }
-      checkSpellTimer = CKEDITOR.tools.setTimeout(checkSpellExec, 1000, this);
+      checkSpellExec.apply(this);
+      // if (checkSpellTimer) {
+      //   clearTimeout(checkSpellTimer);
+      // }
+      // checkSpellTimer = CKEDITOR.tools.setTimeout(checkSpellExec, 0, this);
       if (parent.hasAttribute('data-spell-word')) {
         parent.remove(true);
         range.select();
@@ -304,14 +309,14 @@ THE SOFTWARE.
 
   function checkWord(txt, charset) {
     cinstance = cinstance;
-    var text = txt.substring(0, txt.length - 1);
-    // var request = "http://speller.yandex.net/services/spellservice.json/checkText?options=8&format=plain&ie=" + charset + "&text=" + txt + "&callback=CKEDITOR.plugins.yaspeller.check";
-    // var head = document.getElementsByTagName("head").item(0);
-    // var script = document.createElement("script");
-    // script.setAttribute("type", "text/javascript");
-    // script.setAttribute("src", request);
-    // head.appendChild(script);
-    CKEDITOR.plugins.yaspeller.check([{"code":1,"pos":8,"row":0,"col":8,"len":7,"word":"tetsing","s":["testing"]}])
+    var text = txt; //.substring(0, txt.length - 1);
+    // DEBUG: only mark 'tetsing' as misspelled
+    if(text.indexOf("tetsing") >= 0) {
+      // CKEDITOR.plugins.yaspeller.check([{"code":1,"pos":8,"row":0,"col":8,"len":7,"word":"tetsing","s":["testing"]}]);
+      CKEDITOR.plugins.yaspeller.check([{"word":"tetsing","s":["testing"]}]);
+    } else {
+      CKEDITOR.plugins.yaspeller.check([]);
+    }
   }
 
 
