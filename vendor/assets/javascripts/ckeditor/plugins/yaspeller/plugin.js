@@ -140,7 +140,7 @@ THE SOFTWARE.
           }
         }
       }
-      var current_text = CKEDITOR.instances[cinstance].getData();
+      var current_text = CKEDITOR.instances[cinstance].getSnapshot();
       for (word in yaspeller_errors[cinstance]){
         var length = word.length;
         var translated_position = current_text.indexOf(word);
@@ -152,7 +152,7 @@ THE SOFTWARE.
         //   '<span class="yaspeller_error" data-spell-word="'+word+'">'+word+'</span>'
         // );
       }
-      CKEDITOR.instances[cinstance].document.getBody().setHtml(current_text);
+      CKEDITOR.instances[cinstance].loadSnapshot(current_text);
       if (focusafter) {
         var newRange = new CKEDITOR.dom.range(range.document);
         newRange.moveToBookmark(s);
