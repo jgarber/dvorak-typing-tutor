@@ -58,7 +58,7 @@ THE SOFTWARE.
         var doc = editor.document;
         body = doc.getBody();
         html = doc.getDocumentElement();
-        doc.on('keydown', checkSpell, editor);
+        doc.on('keyup', checkSpell, editor);
         doc.appendStyleSheet(CKEDITOR.plugins.getPath('yaspeller') + 'css/yaspeller.css');
         if (typeof yaspeller_errors === "undefined") {
           yaspeller_errors = {};
