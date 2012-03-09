@@ -23,29 +23,6 @@ THE SOFTWARE.
 
 (function () {
 
-  var changemode = {
-    canUndo: false,
-    exec: function (editor) {
-      var i;
-      var a = editor.getCommand('changespellcheckermode');
-      if (a.state === 1) {
-        a.setState(CKEDITOR.TRISTATE_OFF);
-        var errs = editor.document.getElementsByTag('span');
-        var errs_len = errs.count();
-        if (errs_len > 0) {
-          for (i = errs_len-1; i >= 0; i--) {
-            if (errs.getItem(i).hasClass('yaspeller_error')) {
-              errs.getItem(i).remove(true);
-            }
-          }
-        }
-      } else {
-        a.setState(CKEDITOR.TRISTATE_ON);
-        checkSpellInit(editor.document.getBody(), editor.name);
-      }
-    }
-  };
-
   CKEDITOR.plugins.add('yaspeller', {
     lang: ['en', 'ru'],
 
@@ -67,14 +44,6 @@ THE SOFTWARE.
         checkSpellInit(body, editor.name);
       });
       
-      editor.addCommand('changespellcheckermode', changemode);
-      editor.getCommand('changespellcheckermode').setState(CKEDITOR.TRISTATE_ON);
-      editor.ui.addButton('SpellCheckerMode', {
-        label: editor.lang.yaspeller.button,
-        icon: this.path + 'images/button.png',
-        command: 'changespellcheckermode'
-      });
-
       var dataProcessor = editor.dataProcessor;
       htmlFilter = dataProcessor && dataProcessor.htmlFilter;
       if (htmlFilter) {
@@ -94,7 +63,7 @@ THE SOFTWARE.
           if (element.hasAttribute('data-spell-word')) {
             return false;
           }
-          };
+      };
       if (editor._.elementsPath && !!(elementsPathFilters = editor._.elementsPath.filters)) {
         elementsPathFilters.push(spellFilter);
       }
@@ -289,7 +258,7 @@ THE SOFTWARE.
   }
 
   function checkSpell(e) {
-    if ((e.data.$.keyCode < 37 || e.data.$.keyCode > 40) && this.getCommand('changespellcheckermode').state === 1) {
+    if ((e.data.$.keyCode < 37 || e.data.$.keyCode > 40)) {
       cinstance = this.name;
       var range = this.getSelection().getRanges()[0];
       var parent = range.startContainer.getParent();
