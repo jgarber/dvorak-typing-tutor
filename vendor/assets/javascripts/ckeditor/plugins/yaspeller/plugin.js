@@ -193,8 +193,6 @@ THE SOFTWARE.
     }
   };
 
-  var checkSpellTimer = null;
-
   String.prototype.replaceAll = function (search, replace) {
     return this.split(search).join(replace);
   };
@@ -296,10 +294,6 @@ THE SOFTWARE.
       var range = this.getSelection().getRanges()[0];
       var parent = range.startContainer.getParent();
       checkSpellExec.apply(this);
-      // if (checkSpellTimer) {
-      //   clearTimeout(checkSpellTimer);
-      // }
-      // checkSpellTimer = CKEDITOR.tools.setTimeout(checkSpellExec, 0, this);
       if (parent.hasAttribute('data-spell-word')) {
         parent.remove(true);
         range.select();
@@ -394,7 +388,6 @@ THE SOFTWARE.
       focusafter = true;
       checkWord(send_text, getCharset());
     }
-    checkSpellTimer = null;
   }
 
   function checkSpellInit(body, name) {
