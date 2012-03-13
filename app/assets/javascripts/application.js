@@ -8,6 +8,7 @@
 //= require ckeditor/init
 //= require ckeditor/adapters/jquery
 //= require ckeditor/plugins/onchange
+//= require ckeditor/plugins/openscayt
 //= require jquery_ujs
 //= require jquery_outerhtml
 //= require json2
