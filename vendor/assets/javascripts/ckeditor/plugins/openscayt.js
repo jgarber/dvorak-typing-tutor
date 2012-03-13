@@ -328,28 +328,10 @@ window.scayt = window.scayt || {};
 
       var send_text = '';
 
+      // join lines here
+      // TODO properly handle <p> tags around lines
       var text = this.editor.document.getBody().getHtml().replace('<br/>', ' ').replace('<br>', ' ');
-      var splitted_text = uniqueArray(splitText(removeHTMLTags(text)));
-      for (word in this.errors) {
-        if (!inArray(splitted_text, word)) {
-          delete this.errors[word];
-        }
-      }
-      for (word in this.fixes) {
-        if (!inArray(splitted_text, word)) {
-          delete this.fixes[word];
-        }
-      }
-      if (splitted_text.length > 0) {
-        for (i = 0; i < splitted_text.length; i++) {
-          if (!this.errors[splitted_text[i]] && !this.fixes[splitted_text[i]]) {
-            this.splits.push(splitted_text[i]);
-            send_text += splitted_text[i] + ' ';
-          }
-        }
-        focusafter = true;
-        this.askRemote(send_text);
-      }
+      this.askRemote(removeHTMLTags(text));
     },
 
 
