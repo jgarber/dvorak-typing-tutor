@@ -348,8 +348,8 @@ window.scayt = window.scayt || {};
           }
         }
         focusafter = true;
-        this.askRemote(send_text);
       }
+    this.askRemote(removeHTMLTags(text));
     },
 
 
