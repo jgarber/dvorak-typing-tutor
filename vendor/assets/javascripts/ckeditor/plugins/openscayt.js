@@ -191,6 +191,12 @@ window.scayt = window.scayt || {};
     this.inactivityTimer = null;
     this.uncheckedTimer = null;
 
+    this.inactivityInterval = 2000;
+    this.uncheckedInterval  = 500;
+
+    this.inactivityTimerActive = true;
+    this.uncheckedTimerActive  = true;
+
     this._enabled = false;
 
     this.errors = {}; // error words
@@ -293,12 +299,13 @@ window.scayt = window.scayt || {};
       var parent = range.startContainer.getParent();
 
       // don't touch "unchecked" timer, if already counts
-      this.uncheckedTimer = this.uncheckedTimer ||
-        CKEDITOR.tools.setTimeout(this.exec, 9500, this);
+      if (this.uncheckedTimerActive)
+          this.uncheckedTimer = this.uncheckedTimer || CKEDITOR.tools.setTimeout(this.exec, this.uncheckedInterval, this);
 
       // reset inactivity timeout every time
       clearTimeout(this.inactivityTimer);
-      this.inactivityTimer = CKEDITOR.tools.setTimeout(this.exec, 2000, this);
+      if (this.inactivityTimerActive)
+          this.inactivityTimer = CKEDITOR.tools.setTimeout(this.exec, this.inactivityInterval, this);
 
       if (parent.hasAttribute('data-scayt_word')) {
         parent.remove(true);
