@@ -761,9 +761,10 @@ window.scayt = window.scayt || {};
           editor.speller.pushRequest(this);
         });
 
-        editor.document.appendStyleSheet(
-          CKEDITOR.plugins.getPath(plugin_name) + 'css/scayt.css'
-        );
+        // Since we use assets pipeline we don't need that
+        //editor.document.appendStyleSheet(
+          //CKEDITOR.plugins.getPath(plugin_name) + 'css/scayt.css'
+        //);
 
 //        checkSpellInit(editor);
       });
