@@ -18,6 +18,7 @@ class App extends Spine.Controller
 
     @voice               = new App.Voice
     @help                = new App.Help
+    @scayt               = new App.Scayt
 
     Spine.Route.setup()
 

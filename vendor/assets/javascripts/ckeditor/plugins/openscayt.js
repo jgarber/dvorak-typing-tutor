@@ -358,8 +358,6 @@ window.scayt = window.scayt || {};
 // Temporary ugly hack. Remove later.
       var text = txt.substring(0, txt.length - 1);
 
-      var request = "http://speller.yandex.net/services/spellservice.json/checkText?options=8&format=plain&callback=window.scayt." + hookname + "&text=" + txt;
-
       // webhook
       window.scayt[hookname] = function(text) {
         // check validity later
@@ -415,24 +413,10 @@ window.scayt = window.scayt || {};
           newRange.select();
         }
 
-        // Remove script element from head
-        var all_scripts = CKEDITOR.document.getElementsByTag( 'script' );
-        for ( var i=0; i < all_scripts.count(); i++ ) {
-          var
-            script = all_scripts.getItem( i ),
-            src = script.getAttribute( 'src' ) || '';
-          if ( src.indexOf(request) === 0) { // check @ first position
-            script.remove();
-          }
-        }
         window.scayt[hookname] = null;
       }
 
-      var head = document.getElementsByTagName("head").item(0);
-      var script = document.createElement("script");
-      script.setAttribute("type", "text/javascript");
-      script.setAttribute("src", request);
-      head.appendChild(script);
+      app.scayt.check(text, window.scayt[hookname])
     }
   };
 
