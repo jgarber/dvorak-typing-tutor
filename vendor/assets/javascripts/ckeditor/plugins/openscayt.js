@@ -370,6 +370,8 @@ window.scayt = window.scayt || {};
         // check validity later
         var editor = self.editor;
 
+        editor.speller.errors = {}
+
         var i;
         temp_err = [];
 
