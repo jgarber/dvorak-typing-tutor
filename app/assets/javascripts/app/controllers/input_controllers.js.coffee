@@ -6,6 +6,10 @@ class App.InputController extends Spine.Controller
     @tmp_html = @el.html()
     @input = new App.Input(@el)
     @el.ckeditor(@ready,
+      contentsCss: [
+        '/assets/ckeditor/contents.css',
+        '/assets/editor.css'
+      ]
       extraPlugins: 'onchange,openscayt'
       minimumChangeMilliseconds: 100
       width: 640
