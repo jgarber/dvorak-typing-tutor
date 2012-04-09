@@ -372,32 +372,46 @@ window.scayt = window.scayt || {};
 
         var i;
         temp_err = [];
+
+        // add all misspelled words to temp_err array
         for (i = 0; i < text.length; i++) {
           temp_err.push(text[i].word);
         }
-        for (i = 0; i < editor.speller.splits.length; i++) {
-          if (!inArray(temp_err, editor.speller.splits[i])) {
-            editor.speller.fixes[editor.speller.splits[i]] = 1;
-          }
-        }
+
+        // Something about fixes
+        //for (i = 0; i < editor.speller.splits.length; i++) {
+          //if (!inArray(temp_err, editor.speller.splits[i])) {
+            //editor.speller.fixes[editor.speller.splits[i]] = 1;
+          //}
+        //}
+
+        // for every misspelled word
+        // add error object to speller.errors object
+        // under error.word key
         for (i = 0; i < text.length; i++) {
           editor.speller.errors[text[i].word] = text[i];
         }
+
+
         if (focusafter) {
           var range = editor.getSelection().getRanges()[0];
-          if (inWord(range)) {
-            st = getWordStart(range);
-            if (inArray(temp_err, getWordContent(range))) {
-              range.setStart(range.startContainer, st);
-              range.setEnd(range.startContainer, st);
-            }
+          //if (inWord(range)) {
+            //st = getWordStart(range);
+            //if (inArray(temp_err, getWordContent(range))) {
+              //range.setStart(range.startContainer, st);
+              //range.setEnd(range.startContainer, st);
+            //}
+            //var s = range.createBookmark(true);
+          //} else {
             var s = range.createBookmark(true);
-          } else {
-            var s = range.createBookmark(true);
-          }
+          //}
         }
+
+        // get errors from DOM
         var errs = editor.document.getElementsByTag('span');
         var errs_len = errs.count();
+
+        // remove old errors from DOM
         if (errs_len > 0) {
           for (i = errs_len - 1; i >= 0; i--) {
             if (errs.getItem(i).hasClass('scayt-error')) {
@@ -405,21 +419,29 @@ window.scayt = window.scayt || {};
             }
           }
         }
+
+        // Get editor data
         var current_text = editor.getData();
-        for (word in editor.speller.errors){
+
+        // Replace misspelled words with words in span.scayt-error
+        for (word in editor.speller.errors) {
           current_text = current_text.replace(
           new RegExp('\\b' + word + '\\b', 'g'),
             "<span class='scayt-error' data-scayt_word='"+word+"'>"+word+"</span>"
           );
 
         }
+
+        console.log(current_text)
         editor.document.getBody().setHtml(current_text);
+
         if (focusafter) {
           var newRange = new CKEDITOR.dom.range(range.document);
           newRange.moveToBookmark(s);
           newRange.select();
         }
 
+        // remove hook
         window.scayt[hookname] = null;
       }
 
