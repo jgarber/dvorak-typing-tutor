@@ -3,8 +3,14 @@ class App.Scayt
   #[{"code":1,"pos":0,"row":0,"col":0,"len":5,"word":"herep","s":["here"]}]
   check: (text, hook) =>
     errors = []
-    input  = @clean_text(text).split(' ')
-    sample = @current().split(' ')
+    input  = @clean_text(text)
+    sample = @current()
+
+    if sample.indexOf(input) == 0 && sample.length >= input.length
+      return errors
+
+    input = input.split(' ')
+    sample = sample.split(' ')
 
     for word, i in input
       if word.length > 0
