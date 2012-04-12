@@ -23,7 +23,7 @@ class App.Scayt
 
           errors.push(error)
 
-    console.log errors
+
     if hook
       hook(errors)
     else
@@ -37,7 +37,6 @@ class App.Scayt
 
     text = text.replace(/\s\s/, ' ') while text.match(/\s\s/)
 
-    console.log text
     text
 
   current: ->

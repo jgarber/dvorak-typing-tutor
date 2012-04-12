@@ -434,7 +434,6 @@ window.scayt = window.scayt || {};
 
         }
 
-        console.log(current_text)
         editor.document.getBody().setHtml(current_text);
 
         if (focusafter) {
