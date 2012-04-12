@@ -24,9 +24,11 @@ class App.InputController extends Spine.Controller
       startupFocus: true
     )
 
-  ready: ->
+  ready: =>
     Spine.trigger('editor:ready')
+    @bind_events()
 
+  bind_events: ->
     CKEDITOR.instances.input_box.on('change', ->
       Spine.trigger('input_box:changed')
     )
