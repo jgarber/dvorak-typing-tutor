@@ -36,21 +36,26 @@ class App.Input extends App.Base
   shift_released: =>
     app.keyboard_controller.keyboard.downcase()
 
+  # some mess here
   changed: =>
     if @stripped_content() && app.lesson_controller.lesson.current()
-      if @stripped_content() == app.lesson_controller.lesson.current()
+      # if current content without special chars equals to current lesson
+      if @strip_spaces_and_eol(@stripped_content()) == app.lesson_controller.lesson.current()
+        # we will highlight enter
         app.keyboard_controller.keyboard.highlight_return()
       else
+        # if current content != current phrase we will highligth next letter
         @highlight_next()
 
   next_string: =>
-    content = (@stripped_content() || '').replace(/\n/g, '')
-    content = content.replace(/\s$/g, '')
-    content = content.replace(/^\s/g, '')
+    content = @strip_spaces_and_eol(@stripped_content() || '')
     console.clear()
+    console.log "match = #{@stripped_content().match(/\n/)}"
+    console.log "current phrase = '#{app.lesson_controller.lesson.current()}'"
     console.log "current lesson = '#{app.lesson_controller.lesson.current_lesson()}'"
     console.log "content = '#{content}'"
 
+    # if content is equal to lesson we will finish lesson
     if content == app.lesson_controller.lesson.current_lesson()
       Spine.trigger('app:finish')
 
@@ -84,8 +89,15 @@ class App.Input extends App.Base
    else
      ''
 
+  strip_spaces_and_eol: (content) =>
+    content = content.replace(/\n/g, '')
+    content = content.replace(/\s$/g, '')
+    content.replace(/^\s/g, '')
+
   stripped_content: =>
     @strip(@editor.getData() or '')
 
   return_pressed: =>
-    #
+    if @strip_spaces_and_eol(@stripped_content()) == app.lesson_controller.lesson.current()
+      app.lesson_controller.lesson.go_next()
+
