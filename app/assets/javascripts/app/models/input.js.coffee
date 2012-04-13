@@ -15,7 +15,7 @@ class App.Input extends App.Base
     @highlight_next()
 
   finish: =>
-    @editor.setReadOnly(true)
+    #@editor.setReadOnly(true)
 
   append_content: (content) =>
     @set_content(@get_content() + content)
