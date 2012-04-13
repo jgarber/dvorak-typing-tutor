@@ -7,8 +7,8 @@ class App.Input extends App.Base
 
     Spine.bind('input_box:shift_pressed',  @shift_pressed)
     Spine.bind('input_box:shift_released', @shift_released)
-    Spine.bind('input_box:return_pressed', @return_pressed)
     Spine.bind('input_box:changed',        @changed)
+    Spine.bind('input_box:return_pressed', @return_pressed)
 
   ready: =>
     @editor = CKEDITOR.instances.input_box
@@ -36,35 +36,31 @@ class App.Input extends App.Base
   shift_released: =>
     app.keyboard_controller.keyboard.downcase()
 
-  return_pressed: =>
-    if app.lesson_controller.lesson.current() == @stripped_content()
-      @clear()
-      app.lesson_controller.lesson.go_next()
-      @highlight_next()
-
   changed: =>
     if @stripped_content() && app.lesson_controller.lesson.current()
       if @stripped_content() == app.lesson_controller.lesson.current()
-        if app.lesson_controller.lesson.is_last()
-          Spine.trigger('app:finish')
-        else
-          app.keyboard_controller.keyboard.highlight_return()
+        app.keyboard_controller.keyboard.highlight_return()
       else
         @highlight_next()
-        errors = @errors()
-        @highlight_typos(errors)
-        if errors.present
-          app.voice.beep()
 
   next_string: =>
-    content = @stripped_content() || ''
+    content = (@stripped_content() || '').replace(/\n/g, '')
+    content = content.replace(/\s$/g, '')
+    content = content.replace(/^\s/g, '')
+    console.clear()
+    console.log "current lesson = '#{app.lesson_controller.lesson.current_lesson()}'"
+    console.log "content = '#{content}'"
+
+    if content == app.lesson_controller.lesson.current_lesson()
+      Spine.trigger('app:finish')
 
     if content.length > 0
       regexp = new RegExp("^#{content}", 'i')
-      str = app.lesson_controller.lesson.current().replace(regexp, '')
+      str = app.lesson_controller.lesson.current_lesson().replace(regexp, '')
     else
-      str = app.lesson_controller.lesson.current()
+      str = app.lesson_controller.lesson.current_lesson()
 
+    console.log "next string = '#{str}'"
     str
 
   next_letter: =>
@@ -84,16 +80,12 @@ class App.Input extends App.Base
    str = tmp.textContent or tmp.innerText
 
    if str
-     str = str.replace(/\n|\t/g, '') # trim str
+     str = str.replace(/\t/g, '') # trim str
    else
      ''
 
   stripped_content: =>
     @strip(@editor.getData() or '')
 
-  errors: =>
-    # do nothing here for now
-    []
-
-  highlight_typos: (errors) =>
-    # do nothing here for now
+  return_pressed: =>
+    #

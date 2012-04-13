@@ -23,6 +23,7 @@ class App.Scayt
 
           errors.push(error)
 
+    app.voice.beep() if errors.length > 0
 
     if hook
       hook(errors)

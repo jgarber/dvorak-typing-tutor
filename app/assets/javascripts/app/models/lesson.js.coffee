@@ -2,15 +2,15 @@ class App.Lesson extends App.Base
   constructor: (el) ->
     @el = el
     @_current = 0
-    @phrases = ['A', 'S']
+    @phrases = ['Abc', 'Szx']
     @split_symbol = '|'
 
     Spine.bind('app:start',  @set_all)
     Spine.bind('app:finish', @finish)
 
   set_lesson: (lesson) =>
-    @lesson = lesson
-    @phrases = @lesson.split(@split_symbol)
+    @_lesson = lesson
+    @phrases = @_lesson.split(@split_symbol)
 
   current: =>
     @phrases[@_current]
@@ -50,3 +50,6 @@ class App.Lesson extends App.Base
 
   is_last: =>
     @_current == @phrases.length - 1
+
+  current_lesson: =>
+    @phrases.join('')
