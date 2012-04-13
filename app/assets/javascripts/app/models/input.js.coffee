@@ -49,11 +49,6 @@ class App.Input extends App.Base
 
   next_string: =>
     content = @strip_spaces_and_eol(@stripped_content() || '')
-    console.clear()
-    console.log "match = #{@stripped_content().match(/\n/)}"
-    console.log "current phrase = '#{app.lesson_controller.lesson.current()}'"
-    console.log "current lesson = '#{app.lesson_controller.lesson.current_lesson()}'"
-    console.log "content = '#{content}'"
 
     # if content is equal to lesson we will finish lesson
     if content == app.lesson_controller.lesson.current_lesson()
@@ -65,7 +60,6 @@ class App.Input extends App.Base
     else
       str = app.lesson_controller.lesson.current_lesson()
 
-    console.log "next string = '#{str}'"
     str
 
   next_letter: =>
