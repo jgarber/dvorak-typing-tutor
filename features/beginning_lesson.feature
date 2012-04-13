@@ -40,8 +40,7 @@ Feature: Learn the first keys
     Then the timer should be running
     And the input box should contain "a"
     When I press return
-    Then the input box should be blank
-    And the voice should say "at"
+    Then the voice should say "at"
     And the example loupe should say "at"
 
   Scenario: Needing help finding a key

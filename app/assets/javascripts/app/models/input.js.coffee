@@ -18,7 +18,7 @@ class App.Input extends App.Base
     #@editor.setReadOnly(true)
 
   append_content: (content) =>
-    @set_content(@get_content() + content)
+    @set_content(@strip_spaces_and_eol(@stripped_content()) + content)
 
   set_content: (content = '') =>
     @editor.setData(content)
@@ -94,4 +94,5 @@ class App.Input extends App.Base
   return_pressed: =>
     if @strip_spaces_and_eol(@stripped_content()) == app.lesson_controller.lesson.current()
       app.lesson_controller.lesson.go_next()
+      @highlight_next()
 

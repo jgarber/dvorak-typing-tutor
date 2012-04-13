@@ -4,7 +4,7 @@ module InputContent
   end
 
   def get_input_content
-    page.evaluate_script('app.input_controller.input.stripped_content();')
+    page.evaluate_script('app.input_controller.input.strip_spaces_and_eol(app.input_controller.input.stripped_content());')
   end
 
   def set_input_content(content = '')

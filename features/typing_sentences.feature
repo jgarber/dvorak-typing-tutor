@@ -34,7 +34,7 @@ Feature: Practice typing sentences
     Then the r key should be highlighted on the virtual keyboard
     And the voice should say "The r key is right hand, top row, ring finger, no rich."
     When I type "ruth"
-    When I press return
+    And I press return
     And I hesitate
     Then the u key should be highlighted on the virtual keyboard
     And the voice should say "The u key is left hand, home row, index finger, no rich."

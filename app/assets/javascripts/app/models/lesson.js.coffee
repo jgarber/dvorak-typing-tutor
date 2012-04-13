@@ -11,6 +11,7 @@ class App.Lesson extends App.Base
   set_lesson: (lesson) =>
     @_lesson = lesson
     @phrases = @_lesson.split(@split_symbol)
+    @set_all()
 
   current: =>
     @phrases[@_current]
