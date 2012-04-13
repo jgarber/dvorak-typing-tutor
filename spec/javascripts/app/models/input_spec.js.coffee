@@ -8,8 +8,8 @@ describe 'Input', ->
 
   it 'shoud return next string', ->
     @input.stripped_content = ->
-      'some string here.And '
+      'some string here.And'
     app.lesson_controller.lesson.current_lesson = ->
       'some string here.And another one'
-    expect(@input.next_string()).toEqual('another one')
+    expect(@input.next_string()).toEqual(' another one')
 
