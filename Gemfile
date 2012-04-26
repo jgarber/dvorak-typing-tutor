@@ -22,6 +22,7 @@ group :development, :test do
   gem 'cucumber-rails'
   gem 'jasminerice'
   gem 'spork'
+  gem 'libnotify'
 end
 
 group :test do
