@@ -5,16 +5,20 @@ describe 'Lesson', ->
 
   describe 'lesson initializing', ->
     it 'should split lesson on pagagraphs', ->
-      @lesson.set_lesson('some text \n here \n  ')
+      @lesson.set_lesson('some text\n here\n  ')
       expect(@lesson.paragraphs.length).toEqual(2)
-      expect(@lesson.paragraphs[0]).toEqual('some text')
-      expect(@lesson.paragraphs[1]).toEqual('here')
+      expect(@lesson.paragraphs[0]).toEqual('some text⏎')
+      expect(@lesson.paragraphs[1]).toEqual('here⏎')
 
     it 'should split paragraph on phrases', ->
       @lesson.set_lesson('some text| here ')
       expect(@lesson.phrases.length).toEqual(2)
       expect(@lesson.phrases[0]).toEqual('some text')
       expect(@lesson.phrases[1]).toEqual(' here')
+
+    it 'should replace \\n to ⏎', ->
+      @lesson.set_lesson('some text\n here ')
+      expect(@lesson.phrases[0]).toEqual('some text⏎')
 
 
   describe 'phrases iteration', ->
@@ -71,8 +75,12 @@ describe 'Lesson', ->
 
       describe '#must_be_typed', ->
         it 'detect typed phrases', ->
-          expect(@lesson.myst_be_typed()).toEqual('Second strigSome other stringAnd another stringLorem Lorem')
+          expect(@lesson.must_be_typed()).toEqual('Some other stringAnd another stringLorem Lorem')
 
         it 'detect 2 typed phrases', ->
           @lesson.go_next()
-          expect(@lesson.myst_be_typed()).toEqual('Some other stringAnd another stringLorem Lorem')
+          expect(@lesson.must_be_typed()).toEqual('And another stringLorem Lorem')
+
+      describe '#decorate_eol', ->
+        it 'should add <br /> after ⏎', ->
+          expect(@lesson.decorate_eol('some ⏎ text ⏎ here')).toEqual('some ⏎<br /> text ⏎<br /> here')

@@ -6,6 +6,7 @@ class App.Lesson extends App.Base
     @phrases            = []
     @paragraphs         = []
     @split_symbol       = '|'
+    @eol_symbol         = '⏎'
 
     Spine.bind('app:start',  @set_all)
     Spine.bind('app:finish', @finish)
@@ -14,7 +15,8 @@ class App.Lesson extends App.Base
     @_lesson = lesson
     @paragraphs = []
     # split lesson to paragraphs and chop each paragraph
-    paragraphs = (paragraph.replace(/(^\s+)|([\n\r\s]+$)/g, '') for paragraph in lesson.split('\n'))
+    lesson = lesson.replace(/\n/g, "⏎\n")
+    paragraphs = (paragraph.replace(/(^\s+)|([n\r\s]+$)/g, '') for paragraph in lesson.split('\n'))
 
     for paragraph in paragraphs
       @paragraphs.push(paragraph) if paragraph.replace(/\s+/g, '').length > 0
@@ -39,15 +41,15 @@ class App.Lesson extends App.Base
     @$('.current').html(@current() || '')
 
   set_next: =>
-    @$('.next').html(@next() || '')
+    @$('.next').html(@must_be_typed() || '')
 
   set_previous: =>
-    @$('.previous').html(@previous() || '')
+    @$('.previous').html(@already_typed() || '')
 
   set_all: =>
-    @set_next()
-    @set_current()
     @set_previous()
+    @set_current()
+    @set_next()
     app.voice.say_phrase(@current())
 
   go_next: =>
@@ -71,8 +73,12 @@ class App.Lesson extends App.Base
   input_content: =>
     # nothing here for now
 
-  already_typed: =>
-    @phrases.slice(0, @_current).join('')
+  decorate_eol: (str) =>
+    reg = new RegExp("#{@eol_symbol}", 'g')
+    str.replace(reg, "#{@eol_symbol}<br />")
 
-  myst_be_typed: =>
-    @phrases.slice(@_current).join('')
+  already_typed: =>
+    @decorate_eol(@phrases.slice(0, @_current).join(''))
+
+  must_be_typed: =>
+    @decorate_eol(@phrases.slice(@_current + 1).join(''))

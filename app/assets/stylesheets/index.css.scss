@@ -17,9 +17,20 @@ div {
     padding-top: 63px;
   }
 
-  .sentence {
-    height: 30px;
-    text-align: center;
+  p {
+    display: inline;
+  }
+
+  p.previous {
+    color: #777;
+  }
+
+  p.current {
+    color: #000;
+  }
+
+  p.next {
+    color: #ccc;
   }
 }
 
