@@ -83,4 +83,5 @@ describe 'Lesson', ->
 
       describe '#decorate_eol', ->
         it 'should add <br /> after ⏎', ->
-          expect(@lesson.decorate_eol('some ⏎ text ⏎ here')).toEqual('some ⏎<br /> text ⏎<br /> here')
+          out = "some ⏎</p><p class='break'>&nbsp;</p><p> text ⏎</p><p class='break'>&nbsp;</p><p> here"
+          expect(@lesson.decorate_eol('some ⏎ text ⏎ here')).toEqual(out)

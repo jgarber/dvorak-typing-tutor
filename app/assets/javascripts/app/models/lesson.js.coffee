@@ -75,7 +75,7 @@ class App.Lesson extends App.Base
 
   decorate_eol: (str) =>
     reg = new RegExp("#{@eol_symbol}", 'g')
-    str.replace(reg, "#{@eol_symbol}<br />")
+    str.replace(reg, "#{@eol_symbol}</p><p class='break'>&nbsp;</p><p>")
 
   already_typed: =>
     @decorate_eol(@phrases.slice(0, @_current).join(''))
