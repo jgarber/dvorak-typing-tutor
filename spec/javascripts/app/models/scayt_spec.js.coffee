@@ -1,6 +1,8 @@
 describe 'Scayt', ->
   beforeEach ->
     window.app = new App
+    app.scayt.current = ->
+      'some text here'
 
   describe '#check', ->
     it 'should return empty array on empty string', ->
