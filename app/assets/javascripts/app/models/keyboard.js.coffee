@@ -42,24 +42,25 @@ class App.Keyboard extends App.Base
   highlight_next: (letter) =>
     @clear_highlighting()
 
-    if letter == 'return'
-      $('.return').addClass('highlighted') 
-    else
-      if letter == ' '
-        $('.space').addClass('highlighted') 
+    if letter
+      if letter == app.lesson_controller.lesson.eol_symbol
+        $('.return').addClass('highlighted')
       else
-        layout = @get_current_layout('lowercase')
-        index = layout.indexOf(letter)
-
-        if index != -1
-          $("#key_#{index}").addClass('highlighted') 
+        if letter == ' '
+          $('.space').addClass('highlighted')
         else
-          layout = @get_current_layout('uppercase')
+          layout = @get_current_layout('lowercase')
           index = layout.indexOf(letter)
 
           if index != -1
             $("#key_#{index}").addClass('highlighted') 
-            @highlight_shift(letter)
+          else
+            layout = @get_current_layout('uppercase')
+            index = layout.indexOf(letter)
+
+            if index != -1
+              $("#key_#{index}").addClass('highlighted')
+              @highlight_shift(letter)
 
   highlight_shift: (letter) =>
     hand = window.app.help.detect_hand(letter)

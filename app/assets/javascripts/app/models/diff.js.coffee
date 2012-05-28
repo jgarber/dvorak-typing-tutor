@@ -1,6 +1,8 @@
 class App.Diff
   contstructor: ->
-    @join_sym = app.lesson_controller.lesson.eol_symbol + ' '
+
+  eol_sym: ->
+    app.lesson_controller.lesson.eol_symbol
 
   content: ->
     if app.input_controller.input.editor
@@ -20,15 +22,17 @@ class App.Diff
   convert_to_lesson_format: (str) ->
     out = []
 
-    for p in $(str)
+    for p, i in $(str)
       html = $(p).html()
       if html && html.indexOf('&nbsp;') < 0
         out.push(html)
+      else
+        out[i - 1] += @eol_sym() if i > 0
 
-    out.join(@join_sym)
+    out = out.join(@eol_sym())
 
   lesson: ->
-    app.lesson_controller.lesson.paragraphs.join(@join_sym).replace(new RegExp("\\#{app.lesson_controller.lesson.split_symbol}", 'g'), '')
+    app.lesson_controller.lesson.paragraphs.join('').replace(new RegExp("\\#{app.lesson_controller.lesson.split_symbol}", 'g'), '')
 
   formatted_lesson: ->
     _lesson = @lesson()
@@ -61,3 +65,11 @@ class App.Diff
     # if content is part of lesson or no errors we assume that everyting is fine
     not (_lesson.indexOf(_content) == 0 || @errors().length == 0)
 
+  next_letter: ->
+    console.log _lesson  = @formatted_lesson().split(/\s+/).join('')
+    console.log _content = @formatted_content().split(/\s+/).join('')
+
+    unless @any_errors()
+      _lesson.replace(new RegExp("^#{_content}"), '')[0]
+    else
+      false
