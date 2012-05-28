@@ -82,6 +82,6 @@ describe 'Lesson', ->
           expect(@lesson.must_be_typed()).toEqual('And another stringLorem Lorem')
 
       describe '#decorate_eol', ->
-        it 'should add <br /> after ⏎', ->
-          out = "some ⏎</p><p class='break'>&nbsp;</p><p> text ⏎</p><p class='break'>&nbsp;</p><p> here"
+        it 'should add <p> after ⏎', ->
+          out = "some ⏎<p class='break'>&nbsp;</p> text ⏎<p class='break'>&nbsp;</p> here"
           expect(@lesson.decorate_eol('some ⏎ text ⏎ here')).toEqual(out)
