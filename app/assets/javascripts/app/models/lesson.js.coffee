@@ -85,3 +85,6 @@ class App.Lesson extends App.Base
 
   must_be_typed: =>
     @decorate_eol(@phrases.slice(@_current + 1).join(''))
+
+  current_and_typed: =>
+    (@phrases.slice(0, @_current).join('')) + (@current() || '')

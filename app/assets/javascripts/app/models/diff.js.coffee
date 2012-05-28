@@ -13,13 +13,14 @@ class App.Diff
   strip_extra_spaces: (str) ->
     while str.match(/\s\s/)
       str = str.replace(/\s\s/g, ' ')
+    str = str.replace(/^\s/g, '').replace(/\s$/g, '')
 
     str
 
   strip_eol_symbols: (str) ->
     str.replace(/\n/g, '')
 
-  convert_to_lesson_format: (str) ->
+  convert_to_lesson_format: (str) =>
     out = []
 
     for p, i in $(str)
@@ -45,7 +46,12 @@ class App.Diff
     _content = @strip_eol_symbols(_content)
     _content = @convert_to_lesson_format(_content)
 
-  compare: ->
+  formatted_current: ->
+    _current = app.lesson_controller.lesson.current_and_typed()
+    _current = @strip_extra_spaces(_current)
+    _current = @strip_eol_symbols(_current)
+
+  compare: =>
     # make diff of input and lesson
     diff(@formatted_lesson().split(/\s+/), @formatted_content().split(/\s+/))
 
@@ -59,15 +65,23 @@ class App.Diff
 
     out
 
-  any_errors: ->
+  any_errors: =>
     _lesson  = @formatted_lesson().split(/\s+/).join('')
     _content = @formatted_content().split(/\s+/).join('')
     # if content is part of lesson or no errors we assume that everyting is fine
     not (_lesson.indexOf(_content) == 0 || @errors().length == 0)
 
-  next_letter: ->
-    console.log _lesson  = @formatted_lesson().split(/\s+/).join('')
-    console.log _content = @formatted_content().split(/\s+/).join('')
+  go_next: =>
+    _current = @formatted_current().split(/\s+/).join('')
+    _content = @formatted_content().split(/\s+/).join('')
+
+    if _current == _content
+      app.lesson_controller.lesson.go_next()
+
+  next_letter: =>
+    _lesson  = @formatted_lesson().split(/\s+/).join('')
+    _content = @formatted_content().split(/\s+/).join('')
+    @go_next()
 
     unless @any_errors()
       _lesson.replace(new RegExp("^#{_content}"), '')[0]
