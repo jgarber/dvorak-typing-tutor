@@ -38,7 +38,7 @@ class App.Lesson extends App.Base
     @phrases[@_current - 1]
 
   set_current: =>
-    @$('.current').html(@current() || '')
+    @$('.current').html(@now_typing() || '')
 
   set_next: =>
     @$('.next').html(@must_be_typed() || '')
@@ -75,7 +75,10 @@ class App.Lesson extends App.Base
 
   decorate_eol: (str) =>
     reg = new RegExp("#{@eol_symbol}", 'g')
-    str.replace(reg, "#{@eol_symbol}</p><p class='break'>&nbsp;</p><p>")
+    str.replace(reg, "#{@eol_symbol}<p class='break'>&nbsp;</p>")
+
+  now_typing: =>
+    @decorate_eol(@current() || '')
 
   already_typed: =>
     @decorate_eol(@phrases.slice(0, @_current).join(''))
