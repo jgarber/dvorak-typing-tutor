@@ -363,7 +363,7 @@ window.scayt = window.scayt || {};
       var hookname = "cb" + this.editor.name;
 
 // Temporary ugly hack. Remove later.
-      var text = txt.substring(0, txt.length - 1);
+      //var text = txt.substring(0, txt.length - 1);
 
       // webhook
       window.scayt[hookname] = function(text) {
@@ -446,7 +446,7 @@ window.scayt = window.scayt || {};
         window.scayt[hookname] = null;
       }
 
-      app.scayt.check(text, window.scayt[hookname])
+      app.scayt.check(window.scayt[hookname])
     }
   };
 
