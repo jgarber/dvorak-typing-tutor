@@ -12,5 +12,5 @@ describe 'Diff', ->
 
   describe '#convert_to_lesson_format', ->
     it 'should fetch p tags content', ->
-      expect(app.diff.convert_to_lesson_format("<p>some text here</p>  <p>and another one</p>")).toEqual('some text here⏎ and another one')
+      expect(app.diff.convert_to_lesson_format("<p>some text here</p>  <p>and another one</p>")).toEqual('some text here⏎⏎and another one')
 
