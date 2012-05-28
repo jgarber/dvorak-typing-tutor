@@ -32,6 +32,9 @@ class App.Diff
 
     out = out.join(@eol_sym())
 
+  remove_whitespaces: (str) ->
+    str.split(/\s+/).join('')
+
   lesson: ->
     app.lesson_controller.lesson.paragraphs.join('').replace(new RegExp("\\#{app.lesson_controller.lesson.split_symbol}", 'g'), '')
 
@@ -66,21 +69,21 @@ class App.Diff
     out
 
   any_errors: =>
-    _lesson  = @formatted_lesson().split(/\s+/).join('')
-    _content = @formatted_content().split(/\s+/).join('')
+    _lesson  = @remove_whitespaces(@formatted_lesson())
+    _content = @remove_whitespaces(@formatted_content())
     # if content is part of lesson or no errors we assume that everyting is fine
     not (_lesson.indexOf(_content) == 0 || @errors().length == 0)
 
   go_next: =>
-    _current = @formatted_current().split(/\s+/).join('')
-    _content = @formatted_content().split(/\s+/).join('')
+    _current = @remove_whitespaces(@formatted_current())
+    _content = @remove_whitespaces(@formatted_content())
 
     if _current == _content
       app.lesson_controller.lesson.go_next()
 
   next_letter: =>
-    _lesson  = @formatted_lesson().split(/\s+/).join('')
-    _content = @formatted_content().split(/\s+/).join('')
+    _lesson  = @remove_whitespaces(@formatted_lesson())
+    _content = @remove_whitespaces(@formatted_content())
     @go_next()
 
     unless @any_errors()
