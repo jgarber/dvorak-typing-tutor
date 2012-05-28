@@ -17,6 +17,7 @@
 //= require spine/manager
 //= require spine/ajax
 //= require spine/route
+//= require hunt-mcilroy
 //
 //= require app/app
 //= require_tree .
